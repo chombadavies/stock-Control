@@ -46,6 +46,7 @@ Route::any('item/product/getStocks/{id}',[\App\Http\Controllers\ItemsController:
 Route::resource('purchases',\App\Http\Controllers\PurchasesController::class);
 Route::resource('store',\App\Http\Controllers\StoreController::class);
 Route::any('supplier/details/{id}',[\App\Http\Controllers\ItemsController::class,'Populate']);
+Route::any('stock/quantity/{id}',[\App\Http\Controllers\ItemsController::class,'stockQuantity']);
 Route::resource('transactions',\App\Http\Controllers\TransactionsController::class);
 Route::resource('orderdetails',\App\Http\Controllers\OrderDetailsController::class);
 Route::resource('stock',\App\Http\Controllers\StockController::class);

@@ -88,16 +88,20 @@ class PurchasesController extends Controller
             $products = $data['product_id'];
             $items = $data['item_id'];
             $units = $data['unit_id'];
+            $supplier_id = $data['supplier_id'];
+            
+           
 
             $purchase = new Purchase();
-            $purchase->supplierName = $data['supplierName'];
-            $purchase->supplierPin = $data['supplierPin'];
-            $purchase->telephoneNumber = $data['telephoneNumber'];
+            // $purchase->supplierName = $data['supplierName'];
+            // $purchase->supplierPin = $data['supplierPin'];
+            // $purchase->telephoneNumber = $data['telephoneNumber'];
             $purchase->orderNumber = $data['orderNumber'];
             $purchase->deliveryNoteNumber = $data['deliveryNoteNumber'];
             $purchase->invoiceNumber = $data['invoiceNumber'];
             $purchase->deleveryDate = $data['deleveryDate'];
             $purchase->centre_id = Auth::User()->centre_id;
+            $purchase->supplier_id = $supplier_id;
             $purchase->delevererName = $data['delevererName'];
             $purchase->delevererPhone = $data['delevererPhone'];
             $purchase->save();
@@ -137,6 +141,7 @@ class PurchasesController extends Controller
                 // $transaction->purchase_item_id = $purchase_item_id;
                 $transaction->centre_id = Auth::User()->centre_id;
                 $transaction->user_id = Auth::User()->id;
+                $transaction->supplier_id =$supplier_id;
                 $transaction->transac_date = date('Y-m-d H:I:s');
                 $transaction->save();
 
@@ -271,10 +276,14 @@ class PurchasesController extends Controller
 
     public function fetchPurchases()
     {
-
         $models = DB::table('purchases')
-            ->select('*')
-            ->where(['centre_id' => Auth::User()->centre_id]);
+        ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
+        ->select('purchases.id', 'suppliers.supplierName', 'suppliers.supplierPin', 'suppliers.phoneNumber', 'purchases.deleveryDate')
+        ->where(['centre_id' => Auth::User()->centre_id])
+        ->get();
+        // $models = DB::table('purchases')
+        //     ->select('*')
+        //     ->where(['centre_id' => Auth::User()->centre_id]);
         return Datatables::of($models)
 
             ->addColumn('action', function ($model) {

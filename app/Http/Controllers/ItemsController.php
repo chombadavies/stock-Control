@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Centre;
 use App\Models\Item;
-use App\Models\Product;
-use App\Models\Supplier;
 use App\Models\Unit;
+use App\Models\Centre;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Supplier;
+use App\Models\CentreItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
-use Intervention\Image\Facades\Image;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 
 class ItemsController extends Controller
 {
@@ -263,6 +264,18 @@ $model = Supplier::find($id);
         if ($model) {
             $data = array("id" => $model->id, "SupplierPin" => $model->supplierPin,"telephoneNumber"=>$model->phoneNumber
         ,"supplierEmail"=>$model->supplierEmail);
+            return $data;
+        }
+
+    }
+    public function stockQuantity($id)
+    {
+
+    //  return $id;
+       
+$model = CentreItem::where(['item_id' =>$id, 'centre_id' => Auth::User()->centre_id])->first();
+        if ($model) {
+            $data = array("id" => $model->id, "quantity" => $model->quantity);
             return $data;
         }
 

@@ -73,7 +73,7 @@
                   <tr>
                     
                                         <th>Action</th>
-                                        <th>Name</th>
+                                        <th>Supplier Name</th>
                                         <th> Supplier pin</th>
                                          <th>Delivery Date</th>
                                          <th>Phone</th>
@@ -140,7 +140,7 @@
            {data: 'supplierName', name: 'supplierName'},
            {data: 'supplierPin', name: 'supplierPin'},
            {data: 'deleveryDate', name: 'deleveryDate'},
-           {data: 'telephoneNumber', name: 'telephoneNumber'},      
+           {data: 'phoneNumber', name: 'phoneNumber'},      
             ],
           
 

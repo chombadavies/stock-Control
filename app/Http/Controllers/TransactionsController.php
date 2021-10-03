@@ -111,8 +111,9 @@ class TransactionsController extends Controller
         ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
         ->leftJoin('centres', 'transactions.centre_id', '=', 'centres.id')
         ->leftJoin('purchases', 'transactions.purchase_id', '=', 'purchases.id')
+        ->leftJoin('suppliers', 'transactions.supplier_id', '=', 'suppliers.id')
         ->leftJoin('items', 'transactions.item_id', '=', 'items.id')
-        ->select('transactions.id', 'centres.centreName', 'users.name','purchases.supplierName', 'items.itemName','transactions.debit','transactions.credit')
+        ->select('transactions.id', 'centres.centreName', 'users.name','suppliers.supplierName', 'items.itemName','transactions.debit','transactions.credit')
         ->where(['transactions.centre_id'=>Auth::User()->centre_id])
         // 'transac_date'=> DATE(NOW())
       ->get();

@@ -8,7 +8,6 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\Order_detail;
 use App\Models\Product;
-use App\Models\Stock;
 use App\Models\Store;
 use App\Models\Transaction;
 use App\Models\Unit;
@@ -27,9 +26,9 @@ class StoreController extends Controller
     public function index()
     {
         Session::put('page', 'requestedlist');
-        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') ||Auth::User()->hasRole('Supervisor')||
+        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('Supervisor') ||
             Auth::User()->hasRole('Store Manager')) {
-            $orders = Order_detail::where(['centre_id'=>Auth::User()->centre_id,'dpt_id'=>Auth::User()->dpt_id])->get();
+            $orders = Order_detail::where(['centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
             // dd($orders);
             return view('store.index')->with(compact('orders'));
         } else {
@@ -47,14 +46,14 @@ class StoreController extends Controller
     {
 
         Session::put('page', 'makeorder');
-        if (Auth::User()->hasRole('Staff') || Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Store Manager')|| Auth::User()->hasRole('Centre Manager')|| Auth::User()->hasRole('Supervisor')) {
+        if (Auth::User()->hasRole('Staff') || Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Store Manager') || Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('Supervisor')) {
             $data['page_title'] = 'requestItem';
             $categories = Category::all();
             $products = Product::all();
             $items = Item::all();
-            $stocks = Stock::all();
             $units = Unit::all();
-            return view('store.requestItem', $data, compact('products', 'categories', 'items', 'units', 'stocks'));
+
+            return view('store.requestItem', $data, compact('products', 'categories', 'items', 'units'));
         } else {
             Session::flash('error_message', 'not Permitted to perform this operation');
             return redirect()->back();
@@ -72,8 +71,6 @@ class StoreController extends Controller
     public function store(Request $request)
     {
 
-       
-        
         DB::transaction(function () use ($request) {
 
             $data = $request->all();
@@ -103,37 +100,31 @@ class StoreController extends Controller
                 $description = $descriptions[$key];
                 $user_id = Auth::User()->id;
 
+                // $item = CentreItem::where(['item_id' => $itemId, 'centre_id' => Auth::User()->centre_id])->first();
 
-                 $item = CentreItem::where(['item_id' =>$itemId, 'centre_id' => Auth::User()->centre_id])->first();
-                
                 //  order details/requested items
-                if($saveQty>$item->quantity){
-                    Session::flash('error_message','request quantity is higher than available stock');
-                    return redirect()->back();
-                 }
-                 else{
-                     
-                     $order_detail = new Order_detail();
-                     $order_detail->category_id = $catId;
-                     $order_detail->product_id = $productId;
-                     $order_detail->item_id = $itemId;
-                     $order_detail->order_id = $order_id;
-                     $order_detail->quantity = $saveQty;
-                     $order_detail->itemdescription = $description;
-                     $order_detail->unit_id = $unitId;
-                     $order_detail->user_id = $user_id;
-                     $order_detail->centre_id = Auth::User()->centre_id;
-                     $order_detail->dpt_id = Auth::User()->dpt_id;
-                     $order_detail->save();
-                     $order_detail_id = $order_detail->id;
-                 }
+              
+                    $order_detail = new Order_detail();
+                    $order_detail->category_id = $catId;
+                    $order_detail->product_id = $productId;
+                    $order_detail->item_id = $itemId;
+                    $order_detail->order_id = $order_id;
+                    $order_detail->quantity = $saveQty;
+                    $order_detail->itemdescription = $description;
+                    $order_detail->unit_id = $unitId;
+                    $order_detail->user_id = $user_id;
+                    $order_detail->centre_id = Auth::User()->centre_id;
+                    $order_detail->dpt_id = Auth::User()->dpt_id;
+                    $order_detail->save();
+                    $order_detail_id = $order_detail->id;
+                
+
             }
 
         });
-        Session::flash('succes_message', 'order submitted successfully');
+        Session::flash('success_message', 'order submitted successfully');
         return redirect()->back();
-        
-   
+
     }
 
     /**
@@ -186,19 +177,19 @@ class StoreController extends Controller
 
         Session::put('page', 'approve');
         $orderdetails = DB::table('order_details')
-        ->join('products', 'order_details.product_id', '=', 'products.id')
-        ->join('items', 'order_details.item_id', '=', 'items.id')
-        ->join('users', 'order_details.user_id', '=', 'users.id')
-        ->select('order_details.id',  'items.itemName', 'order_details.quantity','order_details.approve','order_details.reject', 'users.name', 'products.productName')
-        ->where(['order_details.issue'=>0,'order_details.approve'=>0,'order_details.reject'=>0,'order_details.centre_id'=>Auth::User()->centre_id,'order_details.dpt_id'=>Auth::User()->dpt_id])
-        ->get();
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->join('items', 'order_details.item_id', '=', 'items.id')
+            ->join('users', 'order_details.user_id', '=', 'users.id')
+            ->select('order_details.id', 'items.itemName', 'order_details.quantity', 'order_details.approve', 'order_details.reject', 'users.name', 'products.productName')
+            ->where(['order_details.issue' => 0, 'order_details.approve' => 0, 'order_details.reject' => 0, 'order_details.centre_id' => Auth::User()->centre_id, 'order_details.dpt_id' => Auth::User()->dpt_id])
+            ->get();
         return view('store.approve', compact('orderdetails'));
 
     }
     public function approval(Request $request)
     {
 
-        if (Auth::User()->hasRole("Centre Manager") || Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Supervisor')) {
+        if (Auth::User()->hasRole("Centre Manager") || Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Supervisor')) {
             $order = Order_detail::find($request->order_id);
 
             $item = CentreItem::where(['item_id' => $order->item_id, 'centre_id' => Auth::User()->centre_id])->first();
@@ -227,7 +218,7 @@ class StoreController extends Controller
     public function issueItem(Request $request, $id)
     {
         Session::put('page', 'Dispatch');
-     if (Auth::User()->hasRole("Store Manager") || Auth::User()->hasRole('SuperAdmin')) {
+        if (Auth::User()->hasRole("Store Manager") || Auth::User()->hasRole('SuperAdmin')) {
             DB::Transaction(function () use ($request, $id) {
                 $orderDetails = Order_detail::find($id);
                 $order = Order_detail::find($request->order_id);
@@ -251,7 +242,7 @@ class StoreController extends Controller
                 $transaction->order_id = $request->order_id;
                 // $transaction->order_detail_id = $id;
                 $transaction->credit = $order->quantity;
-                $transaction->item_id=$orderDetails->item_id;
+                $transaction->item_id = $orderDetails->item_id;
                 $transaction->user_id = Auth::User()->id;
                 $transaction->centre_id = Auth::User()->centre_id;
                 $transaction->transac_date = date('Y-m-d H:I:s');
@@ -271,16 +262,15 @@ class StoreController extends Controller
         Session::put('page', 'approvedlist');
         $data['page_title'] = 'Approved List';
         if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') ||
-            Auth::User()->hasRole('Store Manager')|| Auth::User()->hasRole('Supervisor')) {
-            $orders = Order_detail::where(['approve'=>1,'issue'=>0,'centre_id'=>Auth::User()->centre_id,'dpt_id'=>Auth::User()->dpt_id])->get();
-            
+            Auth::User()->hasRole('Store Manager') || Auth::User()->hasRole('Supervisor')) {
+            $orders = Order_detail::where(['approve' => 1, 'issue' => 0, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
+
             return view('store.approvedList', $data)->with(compact('orders'));
-        }else if( Auth::User()->hasRole('Staff')){
-            $orders = Order_detail::where(['approve'=>1,'issue'=>0,'centre_id'=>Auth::User()->centre_id,'user_id'=>Auth::User()->id])->get();
-            
+        } else if (Auth::User()->hasRole('Staff')) {
+            $orders = Order_detail::where(['approve' => 1, 'issue' => 0, 'centre_id' => Auth::User()->centre_id, 'user_id' => Auth::User()->id])->get();
+
             return view('store.approvedList', $data)->with(compact('orders'));
-        }
-         else {
+        } else {
             return view('forbidden');
         }
     }
@@ -289,17 +279,15 @@ class StoreController extends Controller
     {
         $data['page_title'] = 'Pending List';
         Session::put('page', 'pendinglist');
-        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('Supervisor')||
+        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('Supervisor') ||
             Auth::User()->hasRole('Store Manager')) {
-            $orders = Order_detail::where(['approve'=>0,'reject'=>0,'issue'=>0,'centre_id'=>Auth::User()->centre_id,'dpt_id'=>Auth::User()->dpt_id])->get();
+            $orders = Order_detail::where(['approve' => 0, 'reject' => 0, 'issue' => 0, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
             return view('store.pendingList', $data)->with(compact('orders'));
-        } else if( Auth::User()->hasRole('Staff')){
-            $orders = Order_detail::where(['approve'=>0,'reject'=>0,'issue'=>0,'centre_id'=>Auth::User()->centre_id,'user_id'=>Auth::User()->id])->get();
-            
+        } else if (Auth::User()->hasRole('Staff')) {
+            $orders = Order_detail::where(['approve' => 0, 'reject' => 0, 'issue' => 0, 'centre_id' => Auth::User()->centre_id, 'user_id' => Auth::User()->id])->get();
+
             return view('store.approvedList', $data)->with(compact('orders'));
-        }
-        
-        else {
+        } else {
             return view('forbidden');
         }
     }
@@ -308,16 +296,14 @@ class StoreController extends Controller
         $data['page_title'] = 'Rejected List';
         Session::put('page', 'rejectedlist');
         if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') ||
-            Auth::User()->hasRole('Store Manager')||Auth::User()->hasRole('Staff')|| Auth::User()->hasRole('Supervisor')) {
-            $orders = Order_detail::where(['reject'=>1,'centre_id'=>Auth::User()->centre_id,'dpt_id'=>Auth::User()->dpt_id])->get();
+            Auth::User()->hasRole('Store Manager') || Auth::User()->hasRole('Staff') || Auth::User()->hasRole('Supervisor')) {
+            $orders = Order_detail::where(['reject' => 1, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
             return view('store.RejectedList', $data)->with(compact('orders'));
-        }else if( Auth::User()->hasRole('Staff')){
-            $orders = Order_detail::where(['reject'=>1,'centre_id'=>Auth::User()->centre_id,'user_id'=>Auth::User()->id])->get();
-            
+        } else if (Auth::User()->hasRole('Staff')) {
+            $orders = Order_detail::where(['reject' => 1, 'centre_id' => Auth::User()->centre_id, 'user_id' => Auth::User()->id])->get();
+
             return view('store.approvedList', $data)->with(compact('orders'));
-        }
-        
-        else {
+        } else {
             return view('forbidden');
         }
     }
@@ -327,22 +313,20 @@ class StoreController extends Controller
         $data['page_title'] = 'Issued List';
         Session::put('page', 'issuedlist');
         if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') ||
-            Auth::User()->hasRole('Store Manager')||Auth::User()->hasRole('Staff')|| Auth::User()->hasRole('Supervisor')) {
-            $orders = Order_detail::where(['issue'=>1,'centre_id'=>Auth::User()->centre_id,'dpt_id'=>Auth::User()->dpt_id])->get();
+            Auth::User()->hasRole('Store Manager') || Auth::User()->hasRole('Staff') || Auth::User()->hasRole('Supervisor')) {
+            $orders = Order_detail::where(['issue' => 1, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
             return view('store.issuedlist', $data)->with(compact('orders'));
-        }else if( Auth::User()->hasRole('Staff')){
-            $orders = Order_detail::where(['issue'=>1,'centre_id'=>Auth::User()->centre_id,'user_id'=>Auth::User()->id])->get();
-            
+        } else if (Auth::User()->hasRole('Staff')) {
+            $orders = Order_detail::where(['issue' => 1, 'centre_id' => Auth::User()->centre_id, 'user_id' => Auth::User()->id])->get();
+
             return view('store.approvedList', $data)->with(compact('orders'));
-        }
-        
-        else {
+        } else {
             return view('forbidden');
         }
     }
     public function reject(Request $request)
     {
-        if (Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Supervisor')) {
+        if (Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Supervisor')) {
 
             $order = Order_detail::find($request->order_id);
             // dd($order->item->itemName);

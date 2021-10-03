@@ -32,7 +32,7 @@
                     <div class="col-sm-4 form-group">
                         <label style="font-weight: normal;">Supplier Name</label>
                       
-                      <select name="supplierName" id="supplierId" class="form-control" style="width: 100%" required>
+                      <select name="supplier_id" id="supplierId" class="form-control" style="width: 100%" required>
                         <option value="" selected disabled >select Supplier</option>
                       @foreach ($suppliers as $supplier)
                           <option value="{{$supplier->id}}">

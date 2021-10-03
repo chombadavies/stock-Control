@@ -45,6 +45,7 @@
                       <th>Product Name</th>
                       <th>Item</th>
                       <th>Description</th>
+                      <th>Available Qty</th>
                       <th>Units</th>
                       <th>Quantity</th>
                 <th> <a href="" class="btn btn-success btn-sm add_more"> <i class="fa fa-plus"></i></a></th>
@@ -77,6 +78,9 @@
                       <input type="text" name="itemdescription[]" id="itemdescription" class="form-control" required>
                     </td>
                     <td>
+                      <input type="text" name="availablestock[]" id="availablestock" class="form-control"  required readonly>
+                    </td>
+                    <td>
                       <select name="unit_id[]" id="unitId" class="form-control unit_id" >
                         <option value="" disabled selected required>Select Units</option>
                     @foreach ($units as $unit)
@@ -85,7 +89,7 @@
                 </select>   
                 </td>
                     <td>
-                        <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" id="total" class="form-control" required>
+                        <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" id="total" class="form-control quantity" required>
                     </td>
                     <td><a href="" class="btn btn-danger btn-sm rounded-circle" id="delete"> <i class="fa fa-times"></i></a></td>
                 </tr>
@@ -151,6 +155,7 @@
             var product= $('#productId').html();
             var item= $('#itemId').html();
             var unit =$('#unitId').html();
+            var availableQty =$('#availablestock').val();
          var numberofrow =($('.addMoreItem tr').length - 0) + 1;
          var tr ='<tr><td class"no"">' + numberofrow + '</td>' +
          '<td><select class="form-control category_id" name="category_id[]" id ="categoryId" required> ' + category +
@@ -160,6 +165,7 @@
          '<td><select class="form-control item_id" name="item_id[]" id="itemId" required> ' + item +
          '</select></td>' +
          '<td> <input type="text" name="itemdescription[]" class="form-control itemdescription" required></td>' +
+         '<td> <input type="text" id="availablestock" name="availablestock[]" class="form-control" required readonly></td>' +
          '<td><select class="form-control unit_id" name="unit_id[]" id ="umitId" required> ' + unit +
          '</select></td>' +
          '<td> <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" class="form-control quantity" required></td>' +
@@ -191,7 +197,7 @@
           $('.addMoreItem').delegate('.product_id','change',function(){
              var id=$(this).val();
              var tr =$(this).parent().parent();
-             var product= tr.find('.product_id option:selected').val();;
+             var product= tr.find('.product_id option:selected').val();
                    if(id.length>0)
                    {
                     var url="<?=url('/item/product/getItems')?>/"+id;
@@ -200,6 +206,39 @@
                        })
                    }
             })
+            $('.addMoreItem').delegate('.item_id','change',function(){
+              // alert('we are here');
+             var id=$(this).val();
+             var tr =$(this).parent().parent();
+             var item= tr.find('.item_id option:selected').val();
+                   if(id.length>0)
+                   {
+                    var url="<?=url('/stock/quantity')?>/"+id;
+                       $.get(url,function(data){
+                        // $('#availablestock').val(data.quantity);
+                        tr.find("#availablestock").val(data.quantity);
+                       })
+                   }
+            })
+            $('.addMoreItem').delegate('.quantity','keyup',function(){
+              // alert('we are here');
+              var id=$(this).val();
+             var reqQuantity=$(this).val();
+             
+             var tr =$(this).parent().parent();
+             var item= tr.find('.item_id option:selected').val();
+                   if(id.length>0)
+                   {
+                    var url="<?=url('/stock/quantity')?>/"+id;
+                       $.get(url,function(data){
+                        var QtyAvailable=(data.quantity);
+                       if(reqQuantity>QtyAvailable){
+                         alert('request quantity is higher than available quantity')
+                       }
+                       })
+                   }
+            })
+          
         </script>
 
 
