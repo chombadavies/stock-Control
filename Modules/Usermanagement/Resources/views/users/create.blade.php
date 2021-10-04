@@ -238,31 +238,31 @@
 
      
 
-                  $(function() {
-              $('#Centre').hide(); 
-              $('#Department').hide(); 
-              $('#Role').change(function(){
-                  if($('#Role').val() =='Store Manager','Staff') {
-                      $('#Centre').show(); 
+          //         $(function() {
+          //     $('#Centre').hide(); 
+          //     $('#Department').hide(); 
+          //     $('#Role').change(function(){
+          //         if($('#Role').val() =='Store Manager','Staff') {
+          //             $('#Centre').show(); 
                       
-                  } 
+          //         } 
                  
                   
-                   else {
-                      $('#Centre').hide(); 
-                  } 
-              });
-              $('#Centre').change(function(){
-                // alert('meme');
-                  if($('#Centre').val() == 'MEME') {
-                      $('#Department').show(); 
+          //          else {
+          //             $('#Centre').hide(); 
+          //         } 
+          //     });
+          //     $('#Centre').change(function(){
+          //       // alert('meme');
+          //         if($('#Centre').val() == 'MEME') {
+          //             $('#Department').show(); 
                       
-                  } 
-                  else {
-                      $('#Department').show(); 
-                  } 
-              });
-          });
+          //         } 
+          //         else {
+          //             $('#Department').show(); 
+          //         } 
+          //     });
+          // });
 
           
        

@@ -56,7 +56,7 @@
                   <thead class="table bg-success">
                   <tr>
                     
-                                        <th>Action</th>
+                                       
                                         <th>Item Name</th>
                                         <th>supplier Name</th>
                                         <th>Centre Name</th>

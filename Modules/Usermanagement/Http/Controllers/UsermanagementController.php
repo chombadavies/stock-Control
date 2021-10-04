@@ -2,20 +2,20 @@
 
 namespace Modules\Usermanagement\Http\Controllers;
 
-use DB;
-use Auth;
-use App\User;
-use Redirect;
+use App\Helpers\SystemAudit;
+use App\Http\Controllers\Controller;
 use App\Models\Centre;
 use App\Models\Department;
-use App\Helpers\SystemAudit;
-use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-use Modules\Usermanagement\Entities\Role;
+use App\User;
+use Auth;
+use DB;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Modules\Usermanagement\Entities\Profile;
+use Modules\Usermanagement\Entities\Role;
+use Redirect;
+use Yajra\Datatables\Datatables;
 
 class UsermanagementController extends Controller
 {
@@ -39,7 +39,7 @@ class UsermanagementController extends Controller
      */
     public function index()
     {
-        Session::put('page','users');
+        Session::put('page', 'users');
         if (Auth::user()->can("Add Users") || Auth::user()->hasRole("SuperAdmin")) {
             $data['page_title'] = "Internal SystemUsers";
 
@@ -56,7 +56,7 @@ class UsermanagementController extends Controller
      */
     public function Create(Request $request)
     {
-        Session::put('page','create user');
+        Session::put('page', 'create user');
 
         $data['page_title'] = "Create Users";
         $data['model'] = new User();
@@ -84,7 +84,7 @@ class UsermanagementController extends Controller
             $user->role_id = $data['role_id'];
             $user->centre_id = $data['centre_id'];
             $user->dpt_id = $data['dpt_id'];
-           
+
             $user->username = $data['id_number'];
             $user->user_type = "Internal";
             //    dd($data);
@@ -94,6 +94,7 @@ class UsermanagementController extends Controller
             $profile->servicenumber = $data['id_number'];
             $profile->gender = $data['gender'];
             $profile->save();
+
             $roles = $data['role_id'];
             $user->assignRole($roles);
             $usermodel = Auth::user();
@@ -113,7 +114,7 @@ class UsermanagementController extends Controller
 
     public function fetchUsers()
     {
-        $models = DB::select(' select users.id,users.name,email,username,phone,user_type,user_status,gender,users.created_at,roles.name as user_role,profiles.servicenumber,departments.dptName,centres.centreName,users.lastlogindate from users
+        $models = DB::select(' select  distinct users.id,users.name,email,username,phone,user_type,user_status,gender,users.created_at,roles.name as user_role,profiles.servicenumber,departments.dptName,centres.centreName,users.lastlogindate from users
    join profiles on profiles.user_id=users.id
   join  model_has_roles on model_has_roles.model_id=users.id
   join centres on centres.id=users.centre_id
@@ -182,7 +183,7 @@ class UsermanagementController extends Controller
 
     public function ViewPermission($id)
     {
-      
+
         $user = User::find($id);
         if (!$user) {
             return "User Details Not Found";
@@ -196,7 +197,7 @@ class UsermanagementController extends Controller
 
     public function ViewRoleUser($id)
     {
-     
+
         $user = User::find($id);
         if (!$user) {
             return "User Details Not Found";
