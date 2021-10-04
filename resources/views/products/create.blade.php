@@ -104,10 +104,10 @@
       transition: 0.3s;
       border-radius: 5px; 
      }
-     .card1:hover {
+     /* .card1:hover {
       box-shadow: 
      5px 5px 10px 5px rgba(235, 11, 11, 0.2),
     -5px -5px 10px 5px rgba(235, 11, 11, 0.2);
   border-radius: 5px;
-     }
+     } */
 </style>

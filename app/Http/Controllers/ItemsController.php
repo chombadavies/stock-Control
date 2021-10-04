@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
-use App\Models\Unit;
-use App\Models\Centre;
-use App\Models\Product;
 use App\Models\Category;
-use App\Models\Supplier;
+use App\Models\Centre;
 use App\Models\CentreItem;
+use App\Models\Item;
+use App\Models\Product;
+use App\Models\Supplier;
+use App\Models\Unit;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
+use Yajra\Datatables\Datatables;
 
 class ItemsController extends Controller
 {
@@ -192,16 +192,16 @@ class ItemsController extends Controller
         } else {
             $imageName = "";
         }
-      
-        $item =Item::find($id);
+
+        $item = Item::find($id);
         $item->product_id = $request->product_id;
         $item->itemName = $request->itemName;
         $item->unit_id = $request->unit_id;
         $item->itemImage = $imageName;
-        $item->itemCode =$request->itemCode;
+        $item->itemCode = $request->itemCode;
         $item->save();
-      
-       Session::flash('success_message', 'item edited successfully');
+
+        Session::flash('success_message', 'item edited successfully');
         return redirect()->route('items.index');
     }
 
@@ -247,8 +247,10 @@ class ItemsController extends Controller
 
     public function cascadeItems($id)
     {
-        
+
         $models = Item::Where(['product_id' => $id])->OrderBy('itemName')->get();
+
+        echo '<option value="">-----select Item Name---</option>';
 
         foreach ($models as $item) {
 
@@ -258,12 +260,12 @@ class ItemsController extends Controller
 
     public function Populate($id)
     {
-       
-$model = Supplier::find($id);
+
+        $model = Supplier::find($id);
 
         if ($model) {
-            $data = array("id" => $model->id, "SupplierPin" => $model->supplierPin,"telephoneNumber"=>$model->phoneNumber
-        ,"supplierEmail"=>$model->supplierEmail);
+            $data = array("id" => $model->id, "SupplierPin" => $model->supplierPin, "telephoneNumber" => $model->phoneNumber
+                , "supplierEmail" => $model->supplierEmail);
             return $data;
         }
 
@@ -271,9 +273,9 @@ $model = Supplier::find($id);
     public function stockQuantity($id)
     {
 
-    //  return $id;
-       
-$model = CentreItem::where(['item_id' =>$id, 'centre_id' => Auth::User()->centre_id])->first();
+        //  return $id;
+
+        $model = CentreItem::where(['item_id' => $id, 'centre_id' => Auth::User()->centre_id])->first();
         if ($model) {
             $data = array("id" => $model->id, "quantity" => $model->quantity);
             return $data;

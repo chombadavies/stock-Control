@@ -197,15 +197,8 @@
                             transition: 0.3s;
                             border-radius: 5px; 
                           }
-                          .card:hover {
-                            box-shadow: 
-                          5px 5px 10px 5px rgba(235, 11, 11, 0.2),
-                          -5px -5px 10px 5px rgba(235, 11, 11, 0.2);
-                        border-radius: 5px;
-                          }
-     
-                           
-                        </style>
+                         */
+      </style>
         
                   @endsection
                   @push("scripts")
