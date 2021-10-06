@@ -298,7 +298,7 @@ class StoreController extends Controller
         if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') ||
             Auth::User()->hasRole('Store Manager') || Auth::User()->hasRole('Staff') || Auth::User()->hasRole('Supervisor')) {
             $orders = Order_detail::where(['reject' => 1, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
-            return view('store.RejectedList', $data)->with(compact('orders'));
+            return view('store.rejectedList', $data)->with(compact('orders'));
         } else if (Auth::User()->hasRole('Staff')) {
             $orders = Order_detail::where(['reject' => 1, 'centre_id' => Auth::User()->centre_id, 'user_id' => Auth::User()->id])->get();
 
