@@ -229,6 +229,7 @@
                         var QtyAvailable=(data.quantity);
                        if(reqQuantity>QtyAvailable){
                          alert('request quantity is higher than available quantity')
+                         window.location.reload();
                        }
                        })
                    }
