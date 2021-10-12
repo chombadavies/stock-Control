@@ -56,7 +56,7 @@
                   <thead class="table bg-success">
                   <tr>
                     
-                                       
+                    <th>Action</th>
                                         <th>Item Name</th>
                                         <th>supplier Name</th>
                                         <th>Centre Name</th>
@@ -101,7 +101,7 @@
 
                     ajax:'<?=url("/fetchtransactions")?>',
                     columns: [
-                    {data: 'action', name: 'action',searchable:false,orderable:false}, 
+                      {data: 'action', name: 'action',searchable:false,orderable:false},
                     {data: 'itemName', name: 'itemName'},
                     {data: 'supplierName', name: 'supplierName'},
                     {data:'centreName',name:'centreName'},
