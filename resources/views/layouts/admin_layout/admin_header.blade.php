@@ -10,7 +10,7 @@
         <a href="{{url('/home')}}" class="btn btn-outline rounded-pill"><i class="fa fa-home">Home</i></a>
       </li>
       <br>
-      <?php if(Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Centre Manager')):?>
+      <?php if(Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Centre Manager')||Auth::User()->hasRole("Test Admin")):?>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{url('/contactsupplers')}}" class="btn btn-outline rounded-pill"><i class="fa fa-money-bill">Suppliers</i></a>
       </li>
