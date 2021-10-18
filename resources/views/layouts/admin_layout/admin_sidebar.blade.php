@@ -48,7 +48,7 @@
         <br>
      
         <?php if(Auth::User()->hasRole("SuperAdmin") || Auth::User()->hasRole('Centre Manager')
-        || Auth::User()->hasRole('Test Admin')):?>
+        || Auth::User()->hasRole('Procurement')):?>
 
         @if (Session::get('page') =="receive purchases" || Session::get('page')=="purchases" || Session::get('page')=="allpurchases")
         <?php $active ='active' ?>
@@ -103,7 +103,7 @@
         </li>
 
         <?php endif;?>
-              <?php if(Auth::User()->hasRole("SuperAdmin")||Auth::User()->hasRole("Test Admin")):?>
+              <?php if(Auth::User()->hasRole("SuperAdmin")):?>
 
             <!--categories -->
              @if (Session::get('page') =="createcategory" || Session::get('page')=="categories")
@@ -190,7 +190,7 @@
             </ul>
           </li>
            <?php endif;?>
-            <?php if(Auth::User()->hasRole("SuperAdmin")||Auth::User()->hasRole("Test Admin")):?>
+            <?php if(Auth::User()->hasRole("SuperAdmin")):?>
  <!--orders -->
             @if (Session::get('page') =="createitem" || Session::get('page')=="items")
             <?php $active ='active' ?>
@@ -233,7 +233,7 @@
             </ul>
           </li>
        <?php endif;?>
-       <?php if(Auth::User()->hasRole("Centre Manager") || Auth::User()->hasRole("SuperAdmin")|| Auth::User()->hasRole("Test Admin")
+       <?php if(Auth::User()->hasRole("Centre Manager") || Auth::User()->hasRole("SuperAdmin")
        || Auth::User()->hasRole("Staff") || Auth::User()->hasRole("Store Manager")|| Auth::User()->hasRole('Supervisor')):?>
          <!--orders -->
         @if (Session::get('page') =="makeorder" || Session::get('page')=="approve" || Session::get('page')=="requestedlist"
@@ -270,7 +270,7 @@
           @else 
           <?php $active ='' ?>
        @endif
-       <?php if(Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Test Admin')):?>
+       <?php if(Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Management')):?>
          <li class="nav-item">
             <a href="{{url('/allstocks')}}"  class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
@@ -284,7 +284,7 @@
           <?php $active ='' ?>
        @endif
        <?php if(Auth::User()->hasRole("Staff") || Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('Store Manager')
-       || Auth::User()->hasRole('Supervisor')||Auth::User()->hasRole('Supervisor')||Auth::User()->hasRole("Test Admin")):?>
+       || Auth::User()->hasRole('Supervisor')):?>
           <li class="nav-item">
             <a href="{{route('store.create')}}"  class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
@@ -297,8 +297,7 @@
           @else 
           <?php $active ='' ?>
        @endif
-       <?php if(Auth::User()->hasRole("Centre Manager") || Auth::User()->hasRole('SuperAdmin')|| 
-       Auth::User()->hasRole('Supervisor')||Auth::User()->hasRole("Test Admin")):?>
+       <?php if(Auth::User()->hasRole("Centre Manager") || Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Supervisor')):?>
              <li class="nav-item">
             <a href="{{url('/approve')}}" class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
@@ -312,8 +311,7 @@
           @else 
           <?php $active ='' ?>
        @endif
-       <?php if(Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Centre Manager')
-       || Auth::User()->hasRole('Supervisor')|| Auth::User()->hasRole('Store Manager')||Auth::User()->hasRole("Test Admin")):?>
+       <?php if(Auth::User()->hasRole('SuperAdmin')|| Auth::User()->hasRole('Centre Manager')|| Auth::User()->hasRole('Supervisor')|| Auth::User()->hasRole('Store Manager')):?>
           <li class="nav-item">
             <a href="{{route('store.index')}}"  class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
@@ -383,7 +381,7 @@
       </li>
    <?php endif;?>
    
-   <?php if(Auth::User()->hasRole("SuperAdmin")||Auth::User()->hasRole("Test Admin")):?>
+   <?php if(Auth::User()->hasRole("SuperAdmin")):?>
  <!--huduma centres -->
    @if (Session::get('page') =="create centre" || Session::get('page')=='huduma centres')
    <?php $active ='active' ?>
@@ -428,7 +426,7 @@
  </li>
 <?php endif;?>
           
-          <?php if(Auth::User()->hasRole("SuperAdmin")|| Auth::User()->hasRole("Test Admin")):?>
+          <?php if(Auth::User()->hasRole("SuperAdmin")):?>
  <!--huduma centres -->
    @if (Session::get('page') =="add supplier" || Session::get('page')=='suppliers')
    <?php $active ='active' ?>
@@ -473,7 +471,7 @@
  </li>
 <?php endif;?>
           <br>   
-     <?php if( Auth::User()->hasRole("SuperAdmin")):?>
+          <?php if(Auth::User()->hasRole("SuperAdmin2")):?>
      @if (Session::get('page') =="users" || Session::get('page') == "create user" 
            || Session::get('page') == "permissions" || Session::get('page') == "roles")
            <?php $active ='active' ?>
@@ -570,62 +568,7 @@
               
             </ul>
           </li>
-{{-- settings --}}
-          {{-- @if (Session::get('page') =="huduma centres" || Session::get('page')=="create centre")
-          <?php $active ='active' ?>
-          @else 
-          <?php $active ='' ?>
-       @endif
 
-                 <li class="nav-item has-treeview">
-            <a href="#" class="nav-link {{$active}}">
-              <i class="nav-icon fas fa-wrench"></i>
-              <p>
-                Settings Module
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-   
-              @if (Session::get('page') =="create centre")
-              <?php $active ='active' ?>
-              @else 
-              <?php $active ='' ?>
-           @endif
-                 <li class="nav-item">
-                 <a href="{{route('centres.create')}}"  class="nav-link {{$active}}">
-                   <i class="far fa-circle nav-icon"></i>
-                   <p>Add New Huduma Centre</p>
-                 </a>
-               </li>
-
-              @if (Session::get('page') =="huduma centres")
-              <?php $active ='active' ?>
-              @else 
-              <?php $active ='' ?>
-           @endif
-              <li class="nav-item">
-                <a href="{{route('centres.index')}}"  class="nav-link {{$active}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>List Of Huduma centres</p>
-                </a>
-              </li>
-              @if (Session::get('page') =="warehouses")
-              <?php $active ='active' ?>
-              @else 
-              <?php $active ='' ?>
-           @endif
-              
-              <li class="nav-item">
-                <a href="{{url('/Backend/Industry/Index')}}"  class="nav-link {{$active}}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ware houses locations</p>
-                </a>
-              </li>
-            
-              
-            </ul>
-          </li> --}}
  <?php endif;?>
                
        

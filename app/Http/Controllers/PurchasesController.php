@@ -39,7 +39,7 @@ class PurchasesController extends Controller
     public function index()
     {
         Session::put('page', 'purchases');
-        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager')) {
+        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager')|| Auth::User()->hasRole('Test Admin')) {
             $data['page_title'] = 'purchases';
 
             return view('purchases.index', $data);
@@ -56,7 +56,7 @@ class PurchasesController extends Controller
     public function create()
     {
         Session::put('page', 'receive purchases');
-        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager')) {
+        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager')|| Auth::User()->hasRole('Test Admin')) {
             $categories = Category::all();
             $suppliers = Supplier::all();
             $units = Unit::all();
@@ -221,7 +221,7 @@ class PurchasesController extends Controller
     {
 
         Session::put('page', 'allstocks');
-        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager')) {
+        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager')|| Auth::User()->hasRole('Test Admin ')) {
             $data['page_title'] = 'allStocks';
 
             return view('stock.allstocks', $data);

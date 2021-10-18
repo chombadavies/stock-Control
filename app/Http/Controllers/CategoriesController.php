@@ -37,9 +37,7 @@ class CategoriesController extends Controller
     {
        Session::put("page","categories");
       
-        if(Auth::User()->hasRole("SuperAdmin")   
-        
-        )
+        if(Auth::User()->hasRole("SuperAdmin")|| Auth::User()->hasRole("Test Admin"))
        {
           $data['page_title']="Categories";
 
@@ -60,7 +58,7 @@ class CategoriesController extends Controller
     {
         Session::put('page','createcategory');
     
-        if(Auth::User()->hasRole("SuperAdmin")){
+        if(Auth::User()->hasRole("SuperAdmin")||Auth::User()->hasRole("Test Admin")){
      
             return view('categories.create');
             }else {
