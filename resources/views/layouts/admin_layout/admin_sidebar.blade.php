@@ -471,7 +471,7 @@
  </li>
 <?php endif;?>
           <br>   
-          <?php if(Auth::User()->hasRole("SuperAdmin")):?>
+          <?php if(Auth::User()->hasRole("SuperAdmin2")):?>
      @if (Session::get('page') =="users" || Session::get('page') == "create user" 
            || Session::get('page') == "permissions" || Session::get('page') == "roles")
            <?php $active ='active' ?>
