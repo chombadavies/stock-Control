@@ -51,6 +51,7 @@ Route::resource('transactions',\App\Http\Controllers\TransactionsController::cla
 Route::resource('orderdetails',\App\Http\Controllers\OrderDetailsController::class);
 Route::resource('stock',\App\Http\Controllers\StockController::class);
 Route::get('/approve',[\App\Http\Controllers\StoreController::class ,'approveOrder']);
+Route::any('/rejectionReason',[\App\Http\Controllers\StoreController::class ,'RejectionReason']);
 Route::post('/approval',[\App\Http\Controllers\StoreController::class ,'approval']);
 Route::any('/blacklist/{id}',[\App\Http\Controllers\SuppliersController::class ,'Blacklist']);
 Route::any('/contact/{id}',[\App\Http\Controllers\SuppliersController::class ,'Contact']);

@@ -92,14 +92,14 @@
                 <input type="submit" class="btn btn-outline-success btn-sm" value="Approve">
               </form> 
 
-             <form action="{{url('/reject')}}" method="POST" class="d-inline">@csrf
+             {{-- <form action="{{url('/reject')}}" method="POST" class="d-inline">@csrf
                   <input  <?php if($orderdetail->reject==1){echo 'checked';}?> type="checkbox" name="reject" required >
                   <input type="hidden" name="order_id" value="{{$orderdetail->id}}">
                   <input type="submit" class="btn btn-outline-danger btn-sm" value="Reject">
-            </form>
-
+            </form> --}}
+            <button class="btn btn-outline-danger btn-sm reject-modal" data-title="Reasons For Rejection" data-url= {{url('/rejectionReason')}}>reject</button>
            
-          <a style="cursor:pointer;" class="reject-modal btn btn-sm btn-info"  data-title="Adjust Order"            data-url= {{url('/orderdetails/' . $orderdetail->id . '/edit')}} >
+          <a style="cursor:pointer;" class="reject-modal btn btn-sm btn-info"  data-title="Adjust Order"  data-url= {{url('/orderdetails/' . $orderdetail->id . '/edit')}} >
 
            <i class="fa fa-edit"></i>Adjust </a>
        </td>

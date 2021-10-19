@@ -24,6 +24,8 @@ class CreateOrderDetailsTable extends Migration
             $table->string('itemdescription')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('centre_id');
+            $table->foreignId('dpt_id')->nullable();
+            $table->string('rejectReason')->nullable();
             $table->boolean('status');
              $table->boolean('approve')->default(false)->nullubale();
              $table->boolean('reject')->default(false)->nullubale();

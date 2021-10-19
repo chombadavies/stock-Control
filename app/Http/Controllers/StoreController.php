@@ -326,10 +326,11 @@ class StoreController extends Controller
     }
     public function reject(Request $request)
     {
+       
         if (Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Supervisor')) {
 
             $order = Order_detail::find($request->order_id);
-            // dd($order->item->itemName);
+           $reasonForRejection= $request->reasonForRejection;
             $item = CentreItem::where(['item_id' => $order->item_id, 'centre_id' => Auth::User()->centre_id])->first();
 //    dd($item);
             $rejectVal = $request->reject;
@@ -337,17 +338,28 @@ class StoreController extends Controller
             if ($rejectVal == 'on') {
                 $rejectVal = 1;
             } else {
-                $approveVal = 0;
+                $rejectVal = 0;
             }
 
             $order->reject = $rejectVal;
             $order->approve = 0;
+            $order->rejectReason =$reasonForRejection;
             $order->save();
 
             return redirect('/approve');
         } else {
             return view('forbidden');
         }
+    }
+    public function RejectionReason(){
+        $orderdetails = DB::table('order_details')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->join('items', 'order_details.item_id', '=', 'items.id')
+            ->join('users', 'order_details.user_id', '=', 'users.id')
+            ->select('order_details.id', 'items.itemName', 'order_details.quantity', 'order_details.approve', 'order_details.reject', 'users.name', 'products.productName')
+            ->where(['order_details.issue' => 0, 'order_details.approve' => 0, 'order_details.reject' => 0, 'order_details.centre_id' => Auth::User()->centre_id, 'order_details.dpt_id' => Auth::User()->dpt_id])
+            ->get();
+        return view('store.rejectionReason',compact('orderdetails'));
     }
 
     public function fetchAllRequests()
