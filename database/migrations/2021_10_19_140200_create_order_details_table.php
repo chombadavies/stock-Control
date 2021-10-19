@@ -14,7 +14,7 @@ class CreateOrderDetailsTable extends Migration
     public function up()
     {
         Schema::table('order_details', function (Blueprint $table) {
-            $table->foreignId('dpt_id')->nullable();
+           
             $table->string('rejectReason')->nullable();
         });
     }
