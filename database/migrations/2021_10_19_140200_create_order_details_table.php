@@ -13,7 +13,7 @@ class CreateOrderDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_details', function (Blueprint $table) {
+        Schema::table('order_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('orderId');
             $table->integer('category_id')->nullable();
@@ -33,7 +33,8 @@ class CreateOrderDetailsTable extends Migration
              $table->timestamps();
         });
     }
-     /**
+
+    /**
      * Reverse the migrations.
      *
      * @return void
