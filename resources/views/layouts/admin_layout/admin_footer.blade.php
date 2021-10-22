@@ -10,6 +10,15 @@
  
 </div>
   </footer>
+  <style>
+
+.main-footer{
+position: sticky; 
+background-color: #fff;
+bottom: 0;
+}
+
+  </style>
  
  
  

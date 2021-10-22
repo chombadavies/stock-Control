@@ -286,7 +286,10 @@ class StoreController extends Controller
     public function pendingList()
     {
         $data['page_title'] = 'Pending List';
+        
+        
         Session::put('page', 'pendinglist');
+        
         if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('Supervisor') ||
             Auth::User()->hasRole('Store Manager')) {
             $orders = Order_detail::where(['approve' => 0, 'reject' => 0, 'issue' => 0, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
