@@ -50,6 +50,7 @@ Route::any('stock/quantity/{id}',[\App\Http\Controllers\ItemsController::class,'
 Route::resource('transactions',\App\Http\Controllers\TransactionsController::class);
 Route::resource('orderdetails',\App\Http\Controllers\OrderDetailsController::class);
 Route::resource('stock',\App\Http\Controllers\StockController::class);
+// Route::any('/adjuststock',[\App\Http\Controllers\StockController::class ,'AdjustStock']);
 Route::get('/approve',[\App\Http\Controllers\StoreController::class ,'approveOrder']);
 Route::any('/rejectionReason',[\App\Http\Controllers\StoreController::class ,'RejectionReason']);
 Route::post('/approval',[\App\Http\Controllers\StoreController::class ,'approval']);

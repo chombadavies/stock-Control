@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
 use App\Models\Stock;
 use App\Models\Centre;
 use App\Models\CentreItem;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -39,18 +39,18 @@ class StockController extends Controller
      */
     public function index()
     {
-        Session::put('page','stockregister');
-        
-        if(Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager')|| Auth::User()->hasRole('Supervisor') || Auth::User()->hasRole('Staff') ||
-        Auth::User()->hasRole('Store Manager') ){
-            $data['page_title']= 'Stock Register';
-         $centre = Centre::where(['id'=>Auth::User()->centre_id])->first();
-       
-        return view('stock.index', $data)->with(compact('centre'));
-    }else {
-        return view('forbidden');
-    }
-   
+        Session::put('page', 'stockregister');
+
+        if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('Supervisor') || Auth::User()->hasRole('Staff') ||
+            Auth::User()->hasRole('Store Manager')) {
+            $data['page_title'] = 'Stock Register';
+            $centre = Centre::where(['id' => Auth::User()->centre_id])->first();
+
+            return view('stock.index', $data)->with(compact('centre'));
+        } else {
+            return view('forbidden');
+        }
+
     }
 
     /**
@@ -91,9 +91,16 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stock $stock)
+    public function edit($id)
     {
-        //
+        // $item = CentreItem::find($id);
+        $item = CentreItem::join('items', 'centre_item.item_id', '=', 'items.id')
+            ->join('products', 'items.product_id', '=', 'products.id')
+            ->select('centre_item.id', 'items.itemName', 'products.productName', 'items.itemCode', 'centre_item.quantity')
+            ->where(['centre_item.id' => $id])
+            ->first();
+        return view('stock.adjustStock')->with(compact('item'));
+
     }
 
     /**
@@ -103,9 +110,23 @@ class StockController extends Controller
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stock $stock)
+    public function update(Request $request,$id)
     {
-        //
+         $centreItem = CentreItem::find($id);
+        $centreItem->quantity= $request->adjustmentvalue;
+    //    dd($centreItem);
+      $centreItem->save();
+
+      $transaction = new Transaction();
+      $transaction->stock_id = $id;
+      $transaction->debit = $request->adjustmentvalue;
+      $transaction->item_id = $centreItem->item_id;
+      $transaction->user_id = Auth::User()->id;
+      $transaction->centre_id = Auth::User()->centre_id;
+      $transaction->transac_date = date('Y-m-d H:I:s');
+      $transaction->save();
+    Session::flash('success_message','Stock adjusted successfully');
+    return redirect('/stock');
     }
 
     /**
@@ -118,7 +139,9 @@ class StockController extends Controller
     {
         //
     }
-
-
+    public function AdjustStock($id)
+    {
+        echo "finally we are about to list the update stock blade";
+    }
 
 }

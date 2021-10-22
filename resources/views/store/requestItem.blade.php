@@ -44,6 +44,7 @@
                       <th>Category Name</th>
                       <th>Product Name</th>
                       <th>Item</th>
+                      <th>Request Type</th>
                       <th>Description</th>
                       <th>Units</th>
                       <th>Quantity</th>
@@ -72,6 +73,14 @@
                         <option value="">select item</option>
                       </select>
                     </td>
+                    <td>
+                      <select name="type_id[]" id="typeId" class="form-control type_id" >
+                        <option value="" disabled selected required>Select Types</option>
+                    @foreach ($requestTypes as $requestType)
+                        <option value="{{$requestType->id}}">{{$requestType->name}}</option>
+                    @endforeach
+                </select>   
+                </td>
                   
                     <td>
                       <input type="text" name="itemdescription[]" id="itemdescription" class="form-control" required>
@@ -146,6 +155,7 @@
             var product= $('#productId').html();
             var item= $('#itemId').html();
             var unit =$('#unitId').html();
+            var type =$('#typeId').html();
             var availableQty =$('#availablestock').val();
          var numberofrow =($('.addMoreItem tr').length - 0) + 1;
          var tr ='<tr><td class"no"">' + numberofrow + '</td>' +
@@ -154,6 +164,8 @@
          '<td><select name="product_id[]" id="productId" class="form-control product_id" style="width: 100%" required>  ' + product +
          '</select></td>' +
          '<td><select class="form-control item_id" name="item_id[]" id="itemId" required> ' + item +
+         '</select></td>' +
+         '<td><select class="form-control type_id" name="type_id[]" id ="typeId" required> ' + type +
          '</select></td>' +
          '<td> <input type="text" name="itemdescription[]" class="form-control itemdescription" required></td>' +
          '<td><select class="form-control unit_id" name="unit_id[]" id ="umitId" required> ' + unit +

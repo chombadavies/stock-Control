@@ -49,13 +49,14 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="categories" class="table table-bordered table-striped">
-                  <thead class="table-success" >
+                  <thead class="table bg-success" >
                   <tr>
-                    {{-- <th>#</th> --}}
+                    
                     <th>Product</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
                     <th>Staff Name</th>
+                    <th>Request Type</th>
                     <th>Appproval</th>
                     <th>Action</th>
                   </tr>
@@ -68,7 +69,7 @@
                     <td>{{$orderdetail->itemName}}</td>   
                     <td>{{$orderdetail->quantity}}</td>
                     <td>{{$orderdetail->name}}</td> 
-                      
+                    <td>{{$orderdetail->names}}</td> 
                     <td>@if ($orderdetail->approve==1)
                       <a class="updateApproval;badge badge-success"  id="orderdetail-{{$orderdetail->id}}" orderdetail_id={{$orderdetail->id}}
                           href="javascript:void(0)">Approved</a>
@@ -92,11 +93,7 @@
                 <input type="submit" class="btn btn-outline-success btn-sm" value="Approve">
               </form> 
 
-             {{-- <form action="{{url('/reject')}}" method="POST" class="d-inline">@csrf
-                  <input  <?php if($orderdetail->reject==1){echo 'checked';}?> type="checkbox" name="reject" required >
-                  <input type="hidden" name="order_id" value="{{$orderdetail->id}}">
-                  <input type="submit" class="btn btn-outline-danger btn-sm" value="Reject">
-            </form> --}}
+ 
             <button class="btn btn-outline-danger btn-sm reject-modal" data-title="Reasons For Rejection" data-url= {{url('/rejectionReason')}}>reject</button>
            
           <a style="cursor:pointer;" class="reject-modal btn btn-sm btn-info"  data-title="Adjust Order"  data-url= {{url('/orderdetails/' . $orderdetail->id . '/edit')}} >

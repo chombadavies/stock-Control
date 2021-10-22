@@ -135,7 +135,7 @@ class PurchasesController extends Controller
 
                 $transaction = new Transaction();
                 $transaction->purchase_id = $purchase_id;
-                $transaction->debit = $saveQty;
+                $transaction->credit = $saveQty;
                 $transaction->user_id = $user_id;
                 $transaction->item_id = $purchase_item->item_id;
                 // $transaction->purchase_item_id = $purchase_item_id;
@@ -259,6 +259,7 @@ class PurchasesController extends Controller
             ->addColumn('action', function ($model) {
                 
                 $makeorder_url = route('store.create');
+                $adjustment_url = url('/stock/' . $model->id . '/edit');
 
                 return '<div class="dropdown ">
     <button class="btn btn-success btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action
@@ -266,7 +267,8 @@ class PurchasesController extends Controller
     <ul class="dropdown-menu">
     <li><div class="dropdown-divider"></div></li>
     <li><a style="cursor:pointer;" data-title="View" href="' . $makeorder_url . '">Make Order</a></li>
-
+    <li><div class="dropdown-divider"></div></li>
+    <li><a style="cursor:pointer;" class="reject-modal"  data-title="View" data-url="' . $adjustment_url . '">Adjust Stock</a></li>
     </ul>
     </div> ';
 

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\Unit;
+use App\Models\Order;
+use App\Models\Store;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\CentreItem;
-use App\Models\Item;
-use App\Models\Order;
-use App\Models\Order_detail;
-use App\Models\Product;
-use App\Models\Store;
+use App\Models\RequestType;
 use App\Models\Transaction;
-use App\Models\Unit;
+use App\Models\Order_detail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class StoreController extends Controller
@@ -51,9 +52,10 @@ class StoreController extends Controller
             $categories = Category::all();
             $products = Product::all();
             $items = Item::all();
+            $requestTypes =RequestType ::all();
             $units = Unit::all();
 
-            return view('store.requestItem', $data, compact('products', 'categories', 'items', 'units'));
+            return view('store.requestItem', $data, compact('products', 'categories', 'items', 'units','requestTypes'));
         } else {
             Session::flash('error_message', 'not Permitted to perform this operation');
             return redirect()->back();
@@ -81,7 +83,9 @@ class StoreController extends Controller
             $products = $data['product_id'];
             $items = $data['item_id'];
             $units = $data['unit_id'];
+            $types = $data['type_id'];
             $descriptions = $data['itemdescription'];
+            //  dd($types);
 
             // //orders
             $order = new Order();
@@ -97,6 +101,7 @@ class StoreController extends Controller
                 $productId = $products[$key];
                 $itemId = $items[$key];
                 $unitId = $units[$key];
+                $typeId = $types[$key];
                 $description = $descriptions[$key];
                 $user_id = Auth::User()->id;
 
@@ -112,6 +117,7 @@ class StoreController extends Controller
                     $order_detail->quantity = $saveQty;
                     $order_detail->itemdescription = $description;
                     $order_detail->unit_id = $unitId;
+                    $order_detail->type_id = $typeId;
                     $order_detail->user_id = $user_id;
                     $order_detail->centre_id = Auth::User()->centre_id;
                     $order_detail->dpt_id = Auth::User()->dpt_id;
@@ -180,9 +186,11 @@ class StoreController extends Controller
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('items', 'order_details.item_id', '=', 'items.id')
             ->join('users', 'order_details.user_id', '=', 'users.id')
-            ->select('order_details.id', 'items.itemName', 'order_details.quantity', 'order_details.approve', 'order_details.reject', 'users.name', 'products.productName')
+            ->join('request_types', 'order_details.type_id', '=', 'request_types.id')
+            ->select('order_details.id', 'items.itemName', 'order_details.quantity','request_types.names', 'order_details.approve', 'order_details.reject', 'users.name', 'products.productName')
             ->where(['order_details.issue' => 0, 'order_details.approve' => 0, 'order_details.reject' => 0, 'order_details.centre_id' => Auth::User()->centre_id, 'order_details.dpt_id' => Auth::User()->dpt_id])
             ->get();
+            
         return view('store.approve', compact('orderdetails'));
 
     }
@@ -241,7 +249,7 @@ class StoreController extends Controller
                 $transaction = new Transaction();
                 $transaction->order_id = $request->order_id;
                 // $transaction->order_detail_id = $id;
-                $transaction->credit = $order->quantity;
+                $transaction->debit = $order->quantity;
                 $transaction->item_id = $orderDetails->item_id;
                 $transaction->user_id = Auth::User()->id;
                 $transaction->centre_id = Auth::User()->centre_id;
