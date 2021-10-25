@@ -139,9 +139,9 @@ class StockController extends Controller
     {
         //
     }
-    public function AdjustStock($id)
-    {
-        echo "finally we are about to list the update stock blade";
-    }
+  
+public function ProduceS13($id){
+dd($id);
+}
 
 }

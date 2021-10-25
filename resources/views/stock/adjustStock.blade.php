@@ -20,7 +20,7 @@
 
             <div class="card card-success card-outline">
               <div class="card-header">
-                <h3 class="card-title">Edit Item</h3>
+                <h3 class="card-title">Adjust Stock</h3>
 </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -55,18 +55,21 @@
                       <div class="row">
                         <div class="col-md-6 col-sm-4">
                           <label  style="font-weight: normal;" >Physical Quantity</label>
-                           <input type="number" class="form-control" id="physicalQuantity"  name="physicalquantity">
+                           <input type="number" class="form-control" id="physicalQuantity"  name="physicalquantity" required>
                       </div>
                       <div class="col-md-6 col-sm-4">
                         <label  style="font-weight: normal;" >Adjustment Value</label>
-                         <input type="number" class="form-control" id="adjustmentValue"  name="adjustmentvalue">
+                         <input type="number" class="form-control" id="adjustmentValue"  name="adjustmentvalue" readonly>
                     </div>
                       </div>
                       <hr>
                    
                 <div class="row">
                         <div class="col-md-6 col-sm-6">
-                           <button class="btn btn-success btn-block">Save</button>
+                          <input type="checkbox" name="reject" required >
+                          <br>
+                          <p style="color: crimson">confirm Stock adjustment</p>
+                           <button class="btn btn-success btn-block">Adjust</button>
                          
                        </div>
                         
@@ -85,6 +88,34 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+
+    <script>
+     
+
+
+         $('#physicalQuantity').on('input',function(e){
+
+          var quantity=$('#quantity').val();
+          var physicalqty=$('#physicalQuantity').val();
+            if(quantity=="")
+            {
+              quantity=0; 
+            }else{
+              quantity=parseInt(quantity);
+            }
+
+
+            if(physicalqty=="")
+            {
+              physicalqty=0; 
+            }else{
+              physicalqty=parseInt(physicalqty);
+            }
+            var balance=quantity-physicalqty;
+              $('#adjustmentValue').val(balance);
+        
+         })
+    </script>
 
     
   

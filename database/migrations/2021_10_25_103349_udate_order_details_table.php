@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateOrderDetailsTable extends Migration
+class UdateOrderDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class UpdateOrderDetailsTable extends Migration
      */
     public function up()
     {
-    Schema::table('order_details',function(Blueprint $table){
-        $table->foreignId('type_id')->nullable();
-    });
+        Schema::table('order_details',function(Blueprint $table){
+            $table->string('financialYr')->nullable();
+            $table->string('qtrname')->nullable();
+        });
     }
 
     /**

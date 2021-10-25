@@ -36,7 +36,7 @@
                       <input type="hidden" name="order_id" value="{{$orderdetail->id}}">
                         <div class="col-md-12 col-sm-4">
                             <label  style="font-weight: normal;" >Reason For Rejection</label>
-                             <textarea class="form-control" id="reason for rejection" name="reasonForRejection" rows="3"></textarea>
+                             <textarea class="form-control" id="reason for rejection" name="reasonForRejection" rows="3" required></textarea>
 
                         </div>
                         
@@ -48,6 +48,7 @@
                 <div class="row">
                         <div class="col-md-6 col-sm-6">
                           <input  <?php if($orderdetail->reject==1){echo 'checked';}?> type="checkbox" name="reject" required >
+                          <p style="color: crimson">Confirm Order Rejection</p>
                            <button class="btn btn-success btn-block">Save</button>
                          
                        </div>

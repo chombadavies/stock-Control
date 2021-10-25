@@ -77,7 +77,7 @@
                       <select name="type_id[]" id="typeId" class="form-control type_id" >
                         <option value="" disabled selected required>Select Types</option>
                     @foreach ($requestTypes as $requestType)
-                        <option value="{{$requestType->id}}">{{$requestType->name}}</option>
+                        <option value="{{$requestType->id}}">{{$requestType->names}}</option>
                     @endforeach
                 </select>   
                 </td>

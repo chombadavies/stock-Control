@@ -260,7 +260,7 @@ class PurchasesController extends Controller
                 
                 $makeorder_url = route('store.create');
                 $adjustment_url = url('/stock/' . $model->id . '/edit');
-
+                $S13_url = url('/produceS13/'. $model->id);
                 return '<div class="dropdown ">
     <button class="btn btn-success btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action
     <span class="caret"></span></button>
@@ -268,7 +268,9 @@ class PurchasesController extends Controller
     <li><div class="dropdown-divider"></div></li>
     <li><a style="cursor:pointer;" data-title="View" href="' . $makeorder_url . '">Make Order</a></li>
     <li><div class="dropdown-divider"></div></li>
-    <li><a style="cursor:pointer;" class="reject-modal"  data-title="View" data-url="' . $adjustment_url . '">Adjust Stock</a></li>
+    <li><a style="cursor:pointer;" class="reject-modal"  data-title="Stock Adjustment" data-url="' . $adjustment_url . '">Adjust Stock</a></li>
+    <li><div class="dropdown-divider"></div></li>
+    <li><a style="cursor:pointer;"  data-title="Stock Adjustment" href="' . $S13_url . '">Produce S13</a></li>
     </ul>
     </div> ';
 
