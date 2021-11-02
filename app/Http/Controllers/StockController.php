@@ -113,14 +113,14 @@ class StockController extends Controller
     public function update(Request $request,$id)
     {
          $centreItem = CentreItem::find($id);
-        $centreItem->quantity= $request->adjustmentvalue;
-    //    dd($centreItem);
+        $centreItem->quantity= $request->physicalquantity;
+   
       $centreItem->save();
-
       $transaction = new Transaction();
       $transaction->stock_id = $id;
       $transaction->debit = $request->adjustmentvalue;
       $transaction->item_id = $centreItem->item_id;
+      $transaction->adjustment_value =$request->adjustmentvalue;
       $transaction->user_id = Auth::User()->id;
       $transaction->centre_id = Auth::User()->centre_id;
       $transaction->transac_date = date('Y-m-d H:I:s');

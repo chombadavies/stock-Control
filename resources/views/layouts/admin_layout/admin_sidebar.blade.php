@@ -470,7 +470,39 @@
    </ul>
  </li>
 <?php endif;?>
-          <br>   
+          <br>
+          <?php if(Auth::User()->hasRole("SuperAdmin")):?>
+          <!--huduma centres -->
+            @if (Session::get('page') =="add supplier" || Session::get('page')=='suppliers')
+            <?php $active ='active' ?>
+            @else 
+            <?php $active ='' ?>
+            @endif
+         
+             <li class="nav-item has-treeview">
+            <a href="#" class="nav-link {{$active}}">
+              <i class="nav-icon fas fa-bars"></i>
+              <p>
+             Fixed Assets
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+             @if (Session::get('page') =="fixed assets")
+             <?php $active ='active' ?>
+             @else 
+             <?php $active ='' ?>
+          @endif
+                <li class="nav-item">
+                <a href="{{url('/fixedasset')}}"  class="nav-link {{$active}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Fixed Assets</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+         <?php endif;?>
+                   <br>  
           <?php if(Auth::User()->hasRole("SuperAdmin")):?>
      @if (Session::get('page') =="users" || Session::get('page') == "create user" 
            || Session::get('page') == "permissions" || Session::get('page') == "roles")

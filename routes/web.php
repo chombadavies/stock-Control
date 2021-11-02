@@ -26,6 +26,7 @@ Auth::routes();
 Route::match(['get','post'],'forgot-password',[App\Http\Controllers\Admin\AdminController::class, 'forgotPassword']);
 Route::group(['middleware'=>['admin']],function(){
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::any('/Dashboard','App\Http\Controllers\HomeController@Dashboard');
 Route::any('/makereports', [App\Http\Controllers\HomeController::class, 'makereports']);
 Route::any('/allpurchases',[\App\Http\Controllers\PurchasesController::class,'allPurchases']);
 Route::any('allstocks',[\App\Http\Controllers\PurchasesController::class,'allStocks']);
