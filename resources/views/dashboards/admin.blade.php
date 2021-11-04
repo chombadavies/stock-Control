@@ -10,8 +10,8 @@
                   } */
                   .card{
   box-shadow: 
-     5px 5px 10px 5px rgba(56, 230, 12, 0.2),
-   -5px -5px 10px 5px rgba(56, 230, 12, 0.2);
+     1px 1px 1px 1px rgba(11, 201, 68, 0.2),
+   1px 1px 1px 5px rgba(38, 201, 17, 0.2);
       transition: 0.3s;
       border-radius: 5px; 
      }
@@ -149,7 +149,7 @@
               </div><!-- /.card-body -->
             </div>
         
-        </section>
+        {{-- </section>
         <section class="col-lg-12 connectedSortable">
           <!-- Custom tabs (Charts with tabs)-->
           <div class="card">
@@ -179,7 +179,7 @@
         
 
       
-      </section>
+      </section> --}}
         <!-- right col -->
       </div>
       <!-- /.row (main row) -->
@@ -204,23 +204,18 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-
-
-
-              <script>
+<script>
                  
 
-                var url="<?=url('/Dashboard')?>";
+                var url="<?=url('/departments')?>";
+                
                  $.get(url,function(data){
-
-
-                  Highcharts.chart('container2', {
+  Highcharts.chart('container2', {
     chart: {
         type: 'pie'
     },
     title: {
-        text: 'Top 8 Frequent Orders'
+        text: 'Orders Per Department'
     },
    
     accessibility: {
@@ -350,7 +345,7 @@ data: data
 
     Highcharts.chart('container3', {
 chart: {
-type: 'column'
+type: 'area'
 },
 title: {
 text: ' Dailly Transactions'
@@ -366,7 +361,7 @@ type: 'category'
 },
 yAxis: {
 title: {
-text: 'Total Quantity Ordered'
+text: 'Transactions'
 }
 
 },

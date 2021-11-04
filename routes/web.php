@@ -27,6 +27,7 @@ Route::match(['get','post'],'forgot-password',[App\Http\Controllers\Admin\AdminC
 Route::group(['middleware'=>['admin']],function(){
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::any('/Dashboard','App\Http\Controllers\HomeController@Dashboard');
+Route::any('/departments','App\Http\Controllers\HomeController@Departments');
 Route::any('/makereports', [App\Http\Controllers\HomeController::class, 'makereports']);
 Route::any('/allpurchases',[\App\Http\Controllers\PurchasesController::class,'allPurchases']);
 Route::any('allstocks',[\App\Http\Controllers\PurchasesController::class,'allStocks']);
