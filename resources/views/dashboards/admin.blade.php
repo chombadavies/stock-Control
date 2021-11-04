@@ -336,110 +336,36 @@
         </section>
         <!-- /.Left col -->
         <!-- right col (We are only adding the ID to make the widgets sortable)-->
-        <section class="col-lg-5 connectedSortable">
+      
 
-          <!-- Map card -->
-          <div class="card bg-gradient-primary">
-            <div class="card-header border-0">
-              <h3 class="card-title">
-                <i class="fas fa-map-marker-alt mr-1"></i>
-                Visitors
-              </h3>
-              <!-- card tools -->
-              <div class="card-tools">
-                <button type="button"
-                        class="btn btn-primary btn-sm daterange"
-                        data-toggle="tooltip"
-                        title="Date range">
-                  <i class="far fa-calendar-alt"></i>
-                </button>
-                <button type="button"
-                        class="btn btn-primary btn-sm"
-                        data-card-widget="collapse"
-                        data-toggle="tooltip"
-                        title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.card-tools -->
-            </div>
-            <div class="card-body">
-              <div id="world-map" style="height: 250px; width: 100%;"></div>
-            </div>
-            <!-- /.card-body-->
-            <div class="card-footer bg-transparent">
-              <div class="row">
-                <div class="col-4 text-center">
-                  <div id="sparkline-1"></div>
-                  <div class="text-white">Visitors</div>
+
+          <section class="col-lg-5 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-chart-pie mr-1"></i>
+                  Orders
+                </h3>
+              
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content p-0">
+                  <!-- Morris chart - Sales -->
+                  
+  
+                    <div id="container2"></div>
+                                          
+                 
+                  
                 </div>
-                <!-- ./col -->
-                <div class="col-4 text-center">
-                  <div id="sparkline-2"></div>
-                  <div class="text-white">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-4 text-center">
-                  <div id="sparkline-3"></div>
-                  <div class="text-white">Sales</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
+              </div><!-- /.card-body -->
             </div>
-          </div>
+        
           <!-- /.card -->
 
           <!-- solid sales graph -->
-          <div class="card bg-gradient-info">
-            <div class="card-header border-0">
-              <h3 class="card-title">
-                <i class="fas fa-th mr-1"></i>
-                Sales Graph
-              </h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer bg-transparent">
-              <div class="row">
-                <div class="col-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="text-white">Mail-Orders</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="text-white">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="text-white">In-Store</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.card-footer -->
-          </div>
-          <!-- /.card -->
+          
 
         
         </section>
@@ -469,14 +395,18 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 
+
+
               <script>
+                 
+
                 var url="<?=url('/Dashboard')?>";
                  $.get(url,function(data){
 
 
-                  Highcharts.chart('container', {
+                  Highcharts.chart('container2', {
     chart: {
-        type: 'column'
+        type: 'pie'
     },
     title: {
         text: 'Top 8 Frequent Orders'
@@ -529,13 +459,76 @@
                  });
                 
               
-        //  var url = "<?url('/transactionsDashboard')?>";     
-        // $.get(function.data{
-
-        // })
+        
                
               </script>
 
+
+<script>
+                 
+
+  var url="<?=url('/Dashboard')?>";
+   $.get(url,function(data){
+
+
+    Highcharts.chart('container', {
+chart: {
+type: 'column'
+},
+title: {
+text: 'Top 8 Frequent Orders'
+},
+
+accessibility: {
+announceNewData: {
+enabled: true
+}
+},
+xAxis: {
+type: 'category'
+},
+yAxis: {
+title: {
+text: 'Total Quantity Ordered'
+}
+
+},
+legend: {
+enabled: false
+},
+plotOptions: {
+series: {
+borderWidth: 0,
+dataLabels: {
+  enabled: true,
+  format: '{point.y}'
+}
+}
+},
+
+tooltip: {
+headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
+},
+
+series: [
+{
+name: "Number",
+colorByPoint: true,
+data: data
+}
+],
+
+});
+
+
+
+   });
+  
+
+
+ 
+</script>
 @endpush
 
         

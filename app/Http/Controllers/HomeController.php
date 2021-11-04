@@ -65,7 +65,7 @@ class HomeController extends Controller
         //   }
 
     }
-    public function makereports()
+    public function departments()
     {
         echo ('Comming soon');
     }
