@@ -48,9 +48,10 @@ class HomeController extends Controller
         $pedding = Order_detail::where(['approve' => 0, 'reject' => 0, 'issue' => 0, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->count();
         $rejected = Order_detail::where(['reject' => 1, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->count();
         $approved = Order_detail::where(['approve' => 1, 'issue' => 0, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->count();
+        $issued = Order_detail::where(['issue' => 1, 'centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->count();
         $centre = Centre::where(['id' => Auth::User()->centre_id])->first();
         Session::put('page', 'dashboard');
-        return view('dashboards.admin', $data)->with(compact('centre', 'pedding', 'rejected', 'approved'));
+        return view('dashboards.admin', $data)->with(compact('centre', 'pedding', 'rejected', 'approved','issued'));
 
         //   }else if(Auth::User()->hasRole(['Student'])){
 

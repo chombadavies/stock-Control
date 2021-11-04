@@ -27,7 +27,7 @@
       <nav class="mt-2">
          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">            
             <!--dashboard -->
-            @if (Session::get('page') =="admin")
+            @if (Session::get('page') =="dashboard")
             <?php $active ='active' ?>
             @else 
             <?php $active ='' ?>
