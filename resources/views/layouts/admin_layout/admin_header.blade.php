@@ -29,9 +29,9 @@
             <a href="{{route('store.create')}}" class="btn btn-outline rounded-pill"><i class="fa fa-money-bill">Make Order</i></a>
       </li>
    
-    <li class="nav-item d-none d-sm-inline-block">
+    {{-- <li class="nav-item d-none d-sm-inline-block">
      <a href="{{url('/fixedasset')}}" class="btn btn-outline rounded-pill"><i class="fa fa-money-bill">Fixed Assets</i></a>
-</li>
+</li> --}}
    
 @if(Auth::guard()->check())
 <li class="nav-item">

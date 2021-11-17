@@ -470,7 +470,7 @@
    </ul>
  </li>
 <?php endif;?>
-          <br>
+          {{-- <br>
           <?php if(Auth::User()->hasRole("SuperAdmin")):?>
           <!--huduma centres -->
             @if (Session::get('page') =="add supplier" || Session::get('page')=='suppliers')
@@ -501,7 +501,7 @@
               </li>
             </ul>
           </li>
-         <?php endif;?>
+         <?php endif;?> --}}
                    <br>  
           <?php if(Auth::User()->hasRole("SuperAdmin")):?>
      @if (Session::get('page') =="users" || Session::get('page') == "create user" 
