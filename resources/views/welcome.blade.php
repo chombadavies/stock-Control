@@ -18,7 +18,7 @@
                          
                           <div class="contentBx" style="width: 80%">
                               <div class="formBx ">
-                                <h1>huduma kenya stock controll system</h1>
+                                <h1>Huduma Kenya Stock Management System</h1>
                               {{-- @include('layouts.notification') --}}
                              <br>
                               <h2>Login</h2>
