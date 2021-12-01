@@ -44,7 +44,7 @@
               <div class="card-body">
                 <div class="table-responsive">
                    <table id="Orgdatatable" class="table table-bordered table-striped"  style="width: 100%;">
-                  <thead class="table-info">
+                  <thead class="table bg-success">
                   <tr>
                    
                 <th>Datetime</th>
@@ -80,6 +80,26 @@
     <!-- /.content -->
   </div>
 @endsection
+
+<style>
+  .card{
+    box-shadow: 
+     5px 5px 10px 5px rgba(56, 230, 12, 0.2),
+     -5px -5px 10px 5px rgba(56, 230, 12, 0.2);
+        transition: 0.3s;
+        border-radius: 5px; 
+       }
+       .card:hover {
+        box-shadow: 
+       5px 5px 10px 5px rgba(235, 11, 11, 0.2),
+      -5px -5px 10px 5px rgba(235, 11, 11, 0.2);
+    border-radius: 5px;
+       }
+       
+       .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+     background-color: #BFDFB1;
+  }
+  </style>
 @push("scripts")
 
 

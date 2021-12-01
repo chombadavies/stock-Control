@@ -58,7 +58,7 @@ class PurchasesController extends Controller
         Session::put('page', 'receive purchases');
         if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager')|| Auth::User()->hasRole('Test Admin')) {
             $categories = Category::all();
-            $suppliers = Supplier::all();
+            $suppliers = Supplier::where(['status' => 1])->get();
             $units = Unit::all();
             $data['page_title'] = "purchases";
             return view('purchases.create', $data)->with(compact('categories', 'units','suppliers'));
@@ -93,9 +93,6 @@ class PurchasesController extends Controller
            
 
             $purchase = new Purchase();
-            // $purchase->supplierName = $data['supplierName'];
-            // $purchase->supplierPin = $data['supplierPin'];
-            // $purchase->telephoneNumber = $data['telephoneNumber'];
             $purchase->orderNumber = $data['orderNumber'];
             $purchase->deliveryNoteNumber = $data['deliveryNoteNumber'];
             $purchase->invoiceNumber = $data['invoiceNumber'];
