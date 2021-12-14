@@ -77,7 +77,7 @@
                        
                       @else 
                       <a class="badge badge-danger"
-                          href="javascript:void(0)">Black listed</a>
+                          href="javascript:void(0)">Inactive</a>
                       @endif
 
                   </td>
@@ -86,12 +86,12 @@
                     <form action="{{url('blacklist/'.$supplier->id)}}" method="POST" class="d-inline">@csrf
                       <input <?php if($supplier->status==1){echo 'checked';}?> type="checkbox" name="blaclist" required >
                       <input type="hidden" name="supplier_id" value="{{$supplier->id}}">
-                       <input type="submit" class="btn btn-outline-danger" value="Black list">
+                       <input type="submit" class="btn btn-outline-danger" value="Deactivate">
                        @else
                        <form action="{{url('reinstate/'.$supplier->id)}}" method="POST" class="d-inline">@csrf
                         <input <?php if($supplier->status==1){echo 'checked';}?> type="checkbox" name="blaclist" required >
                         <input type="hidden" name="supplier_id" value="{{$supplier->id}}">
-                         <input type="submit" class="btn btn-outline-Success" value="Reinstate">
+                         <input type="submit" class="btn btn-outline-Success" value="Activate">
                        @endif
                    </form>
                    </td> 

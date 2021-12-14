@@ -267,6 +267,7 @@ class ItemsController extends Controller
             $data = array("id" => $model->id, "SupplierPin" => $model->supplierPin, "telephoneNumber" => $model->phoneNumber
                 , "supplierEmail" => $model->supplierEmail);
             return $data;
+            
         }
 
     }
@@ -281,6 +282,19 @@ class ItemsController extends Controller
             return $data;
         }
 
+    }
+    public function Units($id){
+        
+     $unit = DB::table('items')
+            ->join('units', 'items.unit_id', '=', 'units.id')
+            ->select('items.id','units.unitName')
+            ->where(['items.id' => $id])
+            ->first();
+            $data = array("id" => $id, "unitName" => $unit->unitName);
+           
+           return $data;
+           
+        
     }
 
 }

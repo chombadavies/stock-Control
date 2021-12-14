@@ -16,9 +16,9 @@
       </li>
       
       <br>
-      {{-- <li class="nav-item d-none d-sm-inline-block">
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('transactions.index')}}" class="btn btn-outline rounded-pill"><i class="fa fa-money-bill">transactions</i></a>
-      </li> --}}
+      </li>
       <?php endif;?>
       <br><br>
            <li class="nav-item d-none d-sm-inline-block">

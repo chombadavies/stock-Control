@@ -65,10 +65,10 @@
                       @foreach ($orders as $order)          
                   <tr>
                    
-                    <td>{{$order->product->productName }}</td>  
-                    <td>{{$order->item->itemName}}</td> 
+                    <td>{{$order->productName }}</td>  
+                    <td>{{$order->itemName}}</td> 
                     <td>{{$order->itemdescription}}</td>
-                    <td>{{($order->user)?$order->user->name:"Not Set"}}</td> 
+                    <td>{{($order->name)?$order->name:"Not Set"}}</td> 
                     <td>{{$order->quantity}}</td> 
                     <td>@if($order->approve==1)
                       <a class="updateApproval badge badge-success"  id="order-{{$order->id}}" order_id={{$order->id}}

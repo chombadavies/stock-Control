@@ -76,6 +76,14 @@ Route::any('fetchsuppliers',[\App\Http\Controllers\SuppliersController::class, '
 Route::any('fetchtransactions',[\App\Http\Controllers\TransactionsController::class, 'fetchTransactions']);
 Route::any('fetchallpurchases',[\App\Http\Controllers\PurchasesController::class, 'fetchallpurchases']);
 Route::any('fetchallstock',[\App\Http\Controllers\PurchasesController::class, 'fetchallstock']);
+Route::any('/fetch/agency',[\App\Http\Controllers\SuppliersController::class, 'fetchAgencies']);
+Route::any('/fetch/departments',[\App\Http\Controllers\SuppliersController::class, 'fetchDepartments']);
+Route::resource('upload', \App\Http\Controllers\UploadController::class);
+Route::any('/fetch/uploads',[\App\Http\Controllers\UploadController::class, 'fetchUploads']);
+Route::any('/download/{file}',[\App\Http\Controllers\UploadController::class, 'Download']);
+Route::any('/view/{id}',[\App\Http\Controllers\UploadController::class, 'View']);
+Route::any('/print/{id}',[\App\Http\Controllers\UploadController::class, 'Print']);
+Route::any('/item/units/{id}',[\App\Http\Controllers\ItemsController::class, 'Units']);
 
 
 

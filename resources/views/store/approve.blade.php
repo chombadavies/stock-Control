@@ -55,6 +55,7 @@
                     <th>Product</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
+                    <th>Stock</th>
                     <th>Staff Name</th>
                     <th>Request Type</th>
                     <th>Appproval</th>

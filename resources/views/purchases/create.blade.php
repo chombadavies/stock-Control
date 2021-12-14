@@ -4,15 +4,25 @@
 <div class="content-wrapper">
   
   <div class="container-fluid">
-    <div class="line">
+    {{-- <div class="line">
       <hr style="border: 2px solid rgb(16, 231, 34)">
-      </div>
+      </div> --}}
+      <br>
        <div class="col-md-12">
            <div class="row">
+            <div class="col-12">
+            
+
+              <a data-url="<?=route('upload.create')?>" class="btn btn-sm btn-info reject-modal" data-title="Upload "><span class="fa fa-plus"><span>Upload Documents</a>
+  
+                                          {{-- <a href="<?=route('upload.index')?>" class="btn btn-sm btn-success reject-modal"><span class="fa fa-bars"><span>Download</a> --}}
+   </div>
+   <br> <br>
            <div class="col-md-12">
 
-         <form action="{{route('purchases.store')}}" method="post">@csrf
+         
               
+          <div class="col-4">
             @if (Session::has('success_message'))
             <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
           {{Session::get('success_message')}}
@@ -21,7 +31,20 @@
               </button>
             </div>
             @endif
-            <div class="card">
+            @if (Session::has('error_message'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px">
+          {{Session::get('error_message')}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            @endif
+          </div>
+         
+            <div class="card"> 
+              <form action="{{route('purchases.store')}}" method="post" 
+              enctype="multipart/form-data">@csrf
+             
                          <div class="card-header"><h4 style="float:left">Supplier details</h4>
                            </div>
                  
@@ -75,11 +98,33 @@
                       
                       </div>
                       <div class="row">
-                        <div class="col-sm-4 form-group ">
-                          <label  style="font-weight: normal;">Invoice No</label>
-                          <input type="text" name="invoiceNumber" id="invoiceNumber" class="form-control" required>
-                          
-                        </div>
+
+                      
+                      <div class="col-sm-4 form-group ">
+                        <label  style="font-weight: normal;">Invoice No</label>
+                        <input type="text" name="invoiceNumber" id="invoiceNumber" class="form-control" required>
+                        
+                      </div>
+                      <div class="col-sm-4 form-group">
+                        <label style="font-weight: normal;">Upload Purchase Order</label>
+                        <input type="file" name="purchase order" id="purchaseOrder" class="form-control" required>
+                        
+                      </div>
+                      <div class="col-sm-4 form-group ">
+                        <label  style="font-weight: normal;">Upload Delivery Note</label>
+                        <input type="file" name="delivery note" id="deliveryNote" class="form-control" required>
+                        
+                      </div>
+                       
+                      
+                      </div>
+                      <div class="row">
+                       
+                      <div class="col-md-4 col-sm-4">
+                        <label  style="font-weight: normal;" >Upload Invoice</label>
+                        <input type="file" name="invoice" id="Invoice" class="form-control" required>
+                       
+                     </div>
                       <div class="col-sm-4 form-group">
                         <label  style="font-weight: normal;">delivery Date</label>
                         <input type="date" name="deleveryDate" id="deleveryDate" class="form-control" required>
@@ -112,10 +157,12 @@
                       <th>#</th>
                       <th>Category Name</th>
                       <th>Product Name</th>
-                      <th>Item</th>
+                      <th>Item Name</th>
                       <th>Description</th>
                       <th>Units</th>
                       <th>Quantity</th>
+                      <th>Price</th>
+                      <th>Total</th>
                 <th> <a href="" class="btn btn-success btn-sm add_more"> <i class="fa fa-plus"></i></a></th>
                   </tr>
               </thead>
@@ -124,7 +171,7 @@
                     <td>1</td>
                     <td>
                           <select name="category_id[]" id="categoryId" class="form-control category_id" >
-                            <option value="" disabled selected required>Select Category</option>
+                            <option value="" disabled selected required>Category</option>
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->categoryName}}</option>
                         @endforeach
@@ -133,12 +180,12 @@
                     </td>
                     <td>
                       <select name="product_id[]" id="productId" class="form-control product_id" style="width: 100%" required>
-                        <option value="" selected disabled >select Product</option>
+                        <option value="" selected disabled >Product</option>
                       </select>
                     </td>
                     <td>
                       <select name="item_id[]" id="itemId" class="form-control item_id" style="width: 100%" required>
-                        <option value="">select item</option>
+                        <option value="">Item</option>
                       </select>
                     </td>
                   
@@ -146,21 +193,29 @@
                       <input type="text" name="description[]" id="description" class="form-control" required>
                     </td>
                     <td>
-                      <select name="unit_id[]" id="unitId" class="form-control unit_id" >
-                        <option value="" disabled selected required>Select Units</option>
-                    @foreach ($units as $unit)
-                        <option value="{{$unit->id}}">{{$unit->unitName}}</option>
-                    @endforeach
-                </select>   
-                </td>
-                    <td>
-                        <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" id="total" class="form-control" required>
+                      <input type="text" name="unit[]" id="unitId" class="form-control unit" required readonly>
                     </td>
+                    <td>
+                        <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" id="Quantity" class="form-control quantity" required>
+                    </td>
+                    <td>
+                      <input type="text" name="price[]" id="Price" class="form-control price" required>
+                    </td>
+                  <td>
+                    <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="total[]" id="Total" class="form-control total" required readonly>
+                </td>
                     <td><a href="" class="btn btn-danger btn-sm rounded-circle" id="delete"> <i class="fa fa-times"></i></a></td>
                 </tr>
-        
-                  
-                </tbody>
+       </tbody>
+                <tr>
+                  <td>$</td>
+                  <td colspan="6" style="text-align:right" name="sum">sum totals</td>
+                  <td>KSh</td>
+                  <td>
+                    <input type="text" name="sumtotal" id="sumtotal" class="form-control sumtotal" required readonly>
+                  </td>
+                  <td><a href="" class="btn btn-danger btn-sm rounded-circle" id="up"> <i class="fa fa-times"></i></a></td>
+                </tr>
 
             </table>
             <hr style=" border: 1px solid green">
@@ -213,6 +268,7 @@
             var product= $('#productId').html();
             var item= $('#itemId').html();
             var unit =$('#unitId').html();
+            var total=$('#total').val()
          var numberofrow =($('.addMoreItem tr').length - 0) + 1;
          var tr ='<tr><td class"no"">' + numberofrow + '</td>' +
          '<td><select class="form-control category_id" name="category_id[]" id ="categoryId" required> ' + category +
@@ -222,9 +278,10 @@
          '<td><select class="form-control item_id" name="item_id[]" id="itemId" required> ' + item +
          '</select></td>' +
          '<td> <input type="text" name="description[]" class="form-control description" required></td>' +
-         '<td><select class="form-control unit_id" name="unit_id[]" id ="umitId" required> ' + unit +
-         '</select></td>' +
-         '<td> <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" class="form-control quantity" required></td>' +
+         '<td> <input type="text" name="unit[]" class="form-control unit" required readonly id="unitId"></td>' +
+         '<td> <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" id="quantity" class="form-control quantity" required></td>' +
+         '<td> <input type="text" name="price[]" class="form-control price"  id="Price" required></td>' +
+         '<td> <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="total[]" id="total" class="form-control total subtotal"  required readonly></td>'+ total +
          '<td> <a class="btn btn-danger btn-sm delete rounded-circle"><i class ="fa fa-times"></i></a></td>';
      $('.addMoreItem').append(tr);
         })
@@ -249,16 +306,27 @@
                       }
           })
           $('.addMoreItem').delegate('.product_id','change',function(){
-            
-
-             var id=$(this).val();
+           var id=$(this).val();
              var tr =$(this).parent().parent();
-             var product= tr.find('.product_id option:selected').val();;
+             var product= tr.find('.product_id option:selected').val();
                    if(id.length>0)
                    {
                     var url="<?=url('/item/product/getItems')?>/"+id;
                           $.get(url,function(data){
                               tr.find(".item_id").html(data);
+                       })
+                   }
+            })
+            $('.addMoreItem').delegate('.item_id','change',function(){
+           var id=$(this).val();
+             var tr =$(this).parent().parent();
+             var item= tr.find('.item_id option:selected').val();
+             
+                   if(id.length>0)
+                   {
+                    var url="<?=url('/item/units')?>/"+id;
+                          $.get(url,function(data){
+                              tr.find(".unit").val(data.unitName);
                        })
                    }
             })
@@ -281,6 +349,34 @@
           }
 
    });
+
+ $('.addMoreItem').delegate('#Price',"input",function(){
+            
+              var tr =$(this).parent().parent();
+        var price= tr.find('.price').val();
+        var Quantity= tr.find('.quantity').val();
+        
+             
+        if(price.length>0)
+          {
+            Product=Quantity*price 
+             tr.find(".total").val(Product);
+             getSum();
+              
+          }
+            })
+            function  getSum()
+      {
+        var sum = 0;
+      $('.total').each(function(){
+            if(this.value.length>0)
+            {
+             sum += parseFloat(this.value.replace(/,/g,'')); 
+            }
+          
+      });
+  $("#sumtotal").val(sum);
+    }
           
         </script>
 

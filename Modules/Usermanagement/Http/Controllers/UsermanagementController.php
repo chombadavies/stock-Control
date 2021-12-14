@@ -2,20 +2,22 @@
 
 namespace Modules\Usermanagement\Http\Controllers;
 
-use App\Helpers\SystemAudit;
-use App\Http\Controllers\Controller;
-use App\Models\Centre;
-use App\Models\Department;
-use App\User;
-use Auth;
 use DB;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Modules\Usermanagement\Entities\Profile;
-use Modules\Usermanagement\Entities\Role;
+use Auth;
+use App\User;
 use Redirect;
+use App\Models\Agency;
+use App\Models\Centre;
+use App\Models\Station;
+use App\Models\Department;
+use App\Helpers\SystemAudit;
+use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Modules\Usermanagement\Entities\Role;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Usermanagement\Entities\Profile;
 
 class UsermanagementController extends Controller
 {
@@ -62,9 +64,9 @@ class UsermanagementController extends Controller
         $data['model'] = new User();
         $data['roles'] = Role::where('name', '!=', 'name')->pluck('name', 'name')->toArray();
         $data['centres'] = Centre::pluck('centreName', 'id')->toArray();
-        $data['departments'] = Department::pluck('dptName', 'id')->toArray();
+        $data['stations'] = Station::pluck('stName', 'id')->toArray();
         $data['url'] = url()->current();
-
+// dd($data['departments']);
         if ($request->isMethod("post")) {
             // $this->validate($request, [
 

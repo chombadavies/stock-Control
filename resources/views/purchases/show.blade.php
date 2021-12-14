@@ -25,7 +25,8 @@
                   <th>Item Name</th>  
                   <th>Description</th>
                   <th>Item Quantity</th>
-                  <th>Status</th>            
+                  <th>price</th> 
+                  <th>total</th> 
                                  
                 </tr>
                 </thead>
@@ -36,14 +37,8 @@
                   <td>{{$item->itemName}}</td>  
                   <td>{{$item->description}}</td> 
                   <td>{{$item->quantity}}</td> 
-                  <td>@if ($item->status==1)
-                    <a class="updateServiceStatus"  id="item-{{$item->id}}" service_id={{$item->id}}
-                        href="javascript:void(0)">Active</a>
-                    @else 
-                    <a class="updateServiceStatus"   id="item-{{$item->id}}" service_id ="{{$item->id}}"
-                        href="javascript:void(0)">InActive</a>
-                    @endif
-                  </td>
+                  <td>{{$item->price}}</td> 
+                  <td>{{$item->total}}</td> 
               
              
                 </tr>

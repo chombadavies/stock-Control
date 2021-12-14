@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Session;
 use App\Models\Unit;
+use App\Models\Upload;
 use App\Models\Category;
 use App\Models\Purchase;
 use App\Models\Supplier;
@@ -81,19 +82,57 @@ class PurchasesController extends Controller
         DB::Transaction(function () use ($request) {
             //purchases
             $data = $request->all();
-
+// dd($data['sumtotal']);
             $user_id = Auth::User()->id;
             $qtys = $data['quantity'];
             $categories = $data['category_id'];
             $products = $data['product_id'];
             $items = $data['item_id'];
-            $units = $data['unit_id'];
+            $units = $data['unit'];
+            $prices = $data['price'];
+            $totals = $data['total'];
             $supplier_id = $data['supplier_id'];
             
            
+            // $request->validate([
+            //     'file'=>'required|mimes:pdf,zip'
+            // ]);
+              $upload=new Upload();
+              $upload->file = $data['purchase_order'];
+               $file=$data['purchase_order'];
+              $fileName=$file->getClientOriginalName();
+              $purchaseorderPath = 'uploads/' . $fileName;
+              $data['purchase_order']->move('uploads',$fileName);
+              $upload->file=$fileName;
+              $upload->description=$purchaseorderPath;
+              $upload->name='Purchase Order';
+              $upload->save();
+
+              $upload=new Upload();
+              $upload->file = $data['delivery_note'];
+               $file=$data['delivery_note'];
+              $deliverynotePath=$file->getClientOriginalName();
+              $filePath = 'uploads/' . $fileName;
+              $data['delivery_note']->move('uploads',$fileName);
+              $upload->file=$fileName;
+              $upload->description=$deliverynotePath;
+              $upload->name='Delivery Note';
+              $upload->save();
+
+              $upload=new Upload();
+              $upload->file = $data['invoice'];
+             $file=$data['invoice'];
+            $fileName=$file->getClientOriginalName();
+            $invoicePath = 'uploads/' . $fileName;
+             $data['invoice']->move('uploads',$fileName);
+              $upload->file=$fileName;
+              $upload->description=$invoicePath;
+              $upload->name='Invoice';
+              $upload->save();
 
             $purchase = new Purchase();
             $purchase->orderNumber = $data['orderNumber'];
+            $purchase->sumtotal = $data['sumtotal'];
             $purchase->deliveryNoteNumber = $data['deliveryNoteNumber'];
             $purchase->invoiceNumber = $data['invoiceNumber'];
             $purchase->deleveryDate = $data['deleveryDate'];
@@ -101,17 +140,21 @@ class PurchasesController extends Controller
             $purchase->supplier_id = $supplier_id;
             $purchase->delevererName = $data['delevererName'];
             $purchase->delevererPhone = $data['delevererPhone'];
+            $purchase->purchase_order = $purchaseorderPath;
+            $purchase->delivery_note = $deliverynotePath;
+            $purchase->invoice = $invoicePath;
             $purchase->save();
             $purchase_id = $purchase->id;
-// $purchase=Purchase::where(['id'=>$purchase->id])->first();
-            // dd($purchase);
+
             foreach ($qtys as $key => $value) {
 
                 $saveQty = $qtys[$key];
                 $catId = $categories[$key];
                 $productId = $products[$key];
                 $itemId = $items[$key];
-                $unitId = $units[$key];
+                $unit = $units[$key];
+                $price = $prices[$key];
+                $total = $totals[$key];
                 $descriptions = $data['description'];
                 $description = $descriptions[$key];
                 $user_id = Auth::User()->id;
@@ -123,9 +166,11 @@ class PurchasesController extends Controller
                 $purchase_item->product_id = $productId;
                 $purchase_item->quantity = $saveQty;
                 $purchase_item->description = $description;
-                $purchase_item->unit_id = $unitId;
+                $purchase_item->units = $unit;
                 $purchase_item->user_id = $user_id;
                 $purchase_item->user_id = $user_id;
+                $purchase_item->price = $price;
+                $purchase_item->total = $total;
                 $purchase_item->centre_id = Auth::User()->centre_id;
                 $purchase_item->save();
                 $purchase_item_id = $purchase_item->id;
@@ -134,6 +179,8 @@ class PurchasesController extends Controller
                 $transaction->purchase_id = $purchase_id;
                 $transaction->credit = $saveQty;
                 $transaction->user_id = $user_id;
+               $transaction->price = $price;
+               $transaction->total = $total;
                 $transaction->item_id = $purchase_item->item_id;
                 // $transaction->purchase_item_id = $purchase_item_id;
                 $transaction->centre_id = Auth::User()->centre_id;
@@ -172,7 +219,7 @@ class PurchasesController extends Controller
         $purchase = Purchase::find($id);
         $purchaseItems = PurchaseItem::join('items', 'items.id', '=', 'purchase_items.item_id')
             ->where(['purchase_id' => $id])
-            ->select('itemName', 'description', 'quantity','status')
+            ->select('itemName', 'description', 'quantity','price','total')
             ->get();
 
         $data['purchaseItems'] = $purchaseItems;
@@ -279,7 +326,7 @@ class PurchasesController extends Controller
     {
         $models = DB::table('purchases')
         ->join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')
-        ->select('purchases.id', 'suppliers.supplierName', 'suppliers.supplierPin', 'suppliers.phoneNumber', 'purchases.deleveryDate')
+        ->select('purchases.id', 'suppliers.supplierName', 'suppliers.supplierPin', 'purchases.sumtotal', 'purchases.deleveryDate')
         ->where(['centre_id' => Auth::User()->centre_id])
         ->get();
         // $models = DB::table('purchases')

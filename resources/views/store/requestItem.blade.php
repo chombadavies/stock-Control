@@ -86,13 +86,8 @@
                       <input type="text" name="itemdescription[]" id="itemdescription" class="form-control" required>
                     </td>                   
                     <td>
-                      <select name="unit_id[]" id="unitId" class="form-control unit_id" >
-                        <option value="" disabled selected required>Select Units</option>
-                    @foreach ($units as $unit)
-                        <option value="{{$unit->id}}">{{$unit->unitName}}</option>
-                    @endforeach
-                </select>   
-                </td>
+                      <input type="text" name="unit[]" id="Unit" class="form-control unit" required readonly>
+                    </td> 
                     <td>
                         <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" id="total" class="form-control quantity" required>
                     </td>
@@ -168,8 +163,7 @@
          '<td><select class="form-control type_id" name="type_id[]" id ="typeId" required> ' + type +
          '</select></td>' +
          '<td> <input type="text" name="itemdescription[]" class="form-control itemdescription" required></td>' +
-         '<td><select class="form-control unit_id" name="unit_id[]" id ="umitId" required> ' + unit +
-         '</select></td>' +
+         '<td> <input type="text" name="unit[]" class="form-control unit" required id="Unit" readonly></td>' +
          '<td> <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" name="quantity[]" class="form-control quantity" required></td>' +
          '<td> <a class="btn btn-danger btn-sm delete rounded-circle"><i class ="fa fa-times"></i></a></td>';
      $('.addMoreItem').append(tr);
@@ -241,7 +235,20 @@
             //            })
             //        }
             // })
-          
+            $('.addMoreItem').delegate('.item_id','change',function(){
+           var id=$(this).val();
+           
+             var tr =$(this).parent().parent();
+             var item= tr.find('.item_id option:selected').val();
+             
+                   if(id.length>0)
+                   {
+                    var url="<?=url('/item/units')?>/"+id;
+                          $.get(url,function(data){
+                              tr.find(".unit").val(data.unitName);
+                       })
+                   }
+            })
         </script>
 
 

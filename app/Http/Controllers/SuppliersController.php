@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TestMail;
+use App\Models\Agency;
+use App\Models\Station;
 use App\Models\Supplier;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
@@ -218,8 +221,25 @@ class SuppliersController extends Controller
                   })
                   ->make(true);
           }
-          public function Pupulate($id){
-              return (' finally meme was here');
+
+         public function fetchAgencies(){
+            $models = Agency::all();
+
+            echo '<option value="">-----select Department---</option>';
+    
+            foreach ($models as $agency) {
+    
+                echo '<option value="' . $agency->id . '">' . $agency->name . '</option>';
+            }
           }
-         
+          public function fetchDepartments(){
+            $models = Department::all();
+
+            echo '<option value="">-----select Department---</option>';
+    
+            foreach ($models as $department) {
+    
+                echo '<option value="' . $department->id . '">' . $department->dptName . '</option>';
+            }
+        }
       }

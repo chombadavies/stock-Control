@@ -76,7 +76,7 @@
                                         <th>Supplier Name</th>
                                         <th> Supplier pin</th>
                                          <th>Delivery Date</th>
-                                         <th>Phone</th>
+                                         <th>Purchase Worth</th>
                                   
                    
                   </tr>
@@ -140,7 +140,7 @@
            {data: 'supplierName', name: 'supplierName'},
            {data: 'supplierPin', name: 'supplierPin'},
            {data: 'deleveryDate', name: 'deleveryDate'},
-           {data: 'phoneNumber', name: 'phoneNumber'},      
+           {data: 'sumtotal', name: 'sumtotal'},      
             ],
           
 

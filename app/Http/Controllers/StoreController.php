@@ -29,8 +29,16 @@ class StoreController extends Controller
         Session::put('page', 'requestedlist');
         if (Auth::User()->hasRole('SuperAdmin') || Auth::User()->hasRole('Centre Manager') || Auth::User()->hasRole('Supervisor') ||
             Auth::User()->hasRole('Store Manager')) {
-            $orders = Order_detail::where(['centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
-            // dd($orders);
+            // $orders = Order_detail::where(['centre_id' => Auth::User()->centre_id, 'dpt_id' => Auth::User()->dpt_id])->get();
+            // // dd($orders);
+            $orders = DB::table('order_details')
+            ->leftJoin('users', 'order_details.user_id', '=', 'users.id')
+            ->leftJoin('products', 'order_details.product_id', '=', 'products.id')
+            ->leftJoin('items', 'order_details.item_id', '=', 'items.id')
+            ->select('order_details.id', 'products.productName', 'users.name','order_details.reject','order_details.issue','items.itemName','order_details.itemdescription','order_details.quantity','order_details.approve')
+            ->where(['order_details.centre_id' => Auth::User()->centre_id, 'order_details.dpt_id' => Auth::User()->dpt_id])
+          ->get();
+        //   dd($orders );
             return view('store.index')->with(compact('orders'));
         } else {
             Session::flash('error_message', 'Not permitted to perform this operation');
@@ -82,7 +90,7 @@ class StoreController extends Controller
             $categories = $data['category_id'];
             $products = $data['product_id'];
             $items = $data['item_id'];
-            $units = $data['unit_id'];
+            $units = $data['unit'];
             $types = $data['type_id'];
             $descriptions = $data['itemdescription'];
             //  dd($types);
@@ -100,7 +108,7 @@ class StoreController extends Controller
                 $catId = $categories[$key];
                 $productId = $products[$key];
                 $itemId = $items[$key];
-                $unitId = $units[$key];
+                $Unit = $units[$key];
                 $typeId = $types[$key];
                 $description = $descriptions[$key];
                 $user_id = Auth::User()->id;
@@ -116,7 +124,7 @@ class StoreController extends Controller
                     $order_detail->order_id = $order_id;
                     $order_detail->quantity = $saveQty;
                     $order_detail->itemdescription = $description;
-                    $order_detail->unit_id = $unitId;
+                    $order_detail->unit = $Unit;
                     $order_detail->type_id = $typeId;
                     $order_detail->user_id = $user_id;
                     $order_detail->centre_id = Auth::User()->centre_id;
@@ -182,14 +190,19 @@ class StoreController extends Controller
     {
 
         Session::put('page', 'approve');
+        
         $orderdetails = DB::table('order_details')
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('items', 'order_details.item_id', '=', 'items.id')
             ->join('users', 'order_details.user_id', '=', 'users.id')
             ->join('request_types', 'order_details.type_id', '=', 'request_types.id')
-            ->select('order_details.id', 'items.itemName', 'order_details.quantity','request_types.names', 'order_details.approve', 'order_details.reject', 'users.name', 'products.productName')
+            ->select('order_details.id', 'items.itemName', 'order_details.quantity','request_types.names', 'order_details.approve', 'order_details.reject','order_details.item_id', 'users.name', 'products.productName')
             ->where(['order_details.issue' => 0, 'order_details.approve' => 0, 'order_details.reject' => 0, 'order_details.centre_id' => Auth::User()->centre_id, 'order_details.dpt_id' => Auth::User()->dpt_id])
             ->get();
+
+            // $item = CentreItem::where(['centre_id' => Auth::User()->centre_id, 'item_id' => $orderdetails['item_id']])
+            // ->first()->toArray();
+            dd($orderdetails['quantity']);
             
         return view('store.approve', compact('orderdetails'));
 
