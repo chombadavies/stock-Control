@@ -121,13 +121,12 @@
       <div class="form-group col-md-6" id="Centre">
         <label   style="font-weight: normal;">Centre <span class="text-danger">*</span></label>
         <span class="input-icon icon-right">
-    {{ Form::select('centre_id',([null=>'--Select Centre--'] + $centres), $model->centre_id, ['class'=>'form-control','style'=>'width:100%']) }}
-            
+          <select name="centre_id[]" id="centreId" class="form-control centre_id" style="width: 100%" required>
+            <option value="">select Centre</option>
+          </select>
         </span>
     </div>
-                                                 
-
-                                              
+                                                                                           
   </div>
   <div class="row">
     <div class="form-group col-md-6" id="Department">
@@ -204,6 +203,12 @@
                          
                            $(".dpt_id").html(data);
                           })
+
+                          var url="<?=url('/fetch/hcentres')?>";
+                          $.get(url,function(data){
+                         console.log(data);
+                           $(".centre_id").html(data);
+                          })
                     
                 }
                 else {
@@ -212,6 +217,12 @@
                   var url="<?=url('/fetch/agency')?>";
                           $.get(url,function(data){
                              $(".dpt_id").html(data);
+                          })
+
+                          var url="<?=url('/fetch/hks')?>";
+                          $.get(url,function(data){
+                         console.log(data);
+                           $(".centre_id").html(data);
                           })
                   }  
                

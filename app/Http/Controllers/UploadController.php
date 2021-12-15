@@ -136,8 +136,7 @@ class UploadController extends Controller
 <span class="caret"></span></button>
 <ul class="dropdown-menu">
 <li><a style="cursor:pointer;" class="reject-modal"  data-title="View Document" data-url="' . $view_url . '">View Document </a></li>
-<li><div class="dropdown-divider"></div></li>
-<li><a style="cursor:pointer;" data-url="' . $download_url . '">Download</a></li>
+
 
 </ul>
 </div> ';

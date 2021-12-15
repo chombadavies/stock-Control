@@ -78,6 +78,8 @@ Route::any('fetchallpurchases',[\App\Http\Controllers\PurchasesController::class
 Route::any('fetchallstock',[\App\Http\Controllers\PurchasesController::class, 'fetchallstock']);
 Route::any('/fetch/agency',[\App\Http\Controllers\SuppliersController::class, 'fetchAgencies']);
 Route::any('/fetch/departments',[\App\Http\Controllers\SuppliersController::class, 'fetchDepartments']);
+Route::any('/fetch/hcentres',[\App\Http\Controllers\SuppliersController::class, 'fetchHcentres']);
+Route::any('/fetch/hks',[\App\Http\Controllers\SuppliersController::class, 'fetchHks']);
 Route::resource('upload', \App\Http\Controllers\UploadController::class);
 Route::any('/fetch/uploads',[\App\Http\Controllers\UploadController::class, 'fetchUploads']);
 Route::any('/download/{file}',[\App\Http\Controllers\UploadController::class, 'Download']);

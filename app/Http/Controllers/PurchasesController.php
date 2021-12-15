@@ -82,7 +82,7 @@ class PurchasesController extends Controller
         DB::Transaction(function () use ($request) {
             //purchases
             $data = $request->all();
-// dd($data['sumtotal']);
+
             $user_id = Auth::User()->id;
             $qtys = $data['quantity'];
             $categories = $data['category_id'];
@@ -94,39 +94,36 @@ class PurchasesController extends Controller
             $supplier_id = $data['supplier_id'];
             
            
-            // $request->validate([
-            //     'file'=>'required|mimes:pdf,zip'
-            // ]);
+          
+           
+
               $upload=new Upload();
-              $upload->file = $data['purchase_order'];
-               $file=$data['purchase_order'];
-              $fileName=$file->getClientOriginalName();
-              $purchaseorderPath = 'uploads/' . $fileName;
-              $data['purchase_order']->move('uploads',$fileName);
-              $upload->file=$fileName;
-              $upload->description=$purchaseorderPath;
+               $purchaseFile=$data['purchaseorder'];
+              $purchaseorderName=$purchaseFile->getClientOriginalName();
+              $purchaseorderPath = 'uploads/' . $purchaseorderName;
+              $data['purchaseorder']->move('uploads',$purchaseorderName);
+              $upload->file=$purchaseorderName;
+              $upload->fileNumber=$data['orderNumber'];
               $upload->name='Purchase Order';
               $upload->save();
 
               $upload=new Upload();
-              $upload->file = $data['delivery_note'];
-               $file=$data['delivery_note'];
-              $deliverynotePath=$file->getClientOriginalName();
-              $filePath = 'uploads/' . $fileName;
-              $data['delivery_note']->move('uploads',$fileName);
-              $upload->file=$fileName;
-              $upload->description=$deliverynotePath;
+               $DeliverynoteFile=$data['deliverynote'];
+              $deliverynoteName=$DeliverynoteFile->getClientOriginalName();
+              $deliverynotePath = 'uploads/' . $deliverynoteName;
+              $data['deliverynote']->move('uploads',$deliverynoteName);
+              $upload->file=$deliverynoteName;
+              $upload->fileNumber=$data['deliveryNoteNumber'];
               $upload->name='Delivery Note';
               $upload->save();
 
               $upload=new Upload();
-              $upload->file = $data['invoice'];
-             $file=$data['invoice'];
-            $fileName=$file->getClientOriginalName();
-            $invoicePath = 'uploads/' . $fileName;
-             $data['invoice']->move('uploads',$fileName);
-              $upload->file=$fileName;
-              $upload->description=$invoicePath;
+             $invoiceFile=$data['invoice'];
+            $invoiceName=$invoiceFile->getClientOriginalName();
+            $invoicePath = 'uploads/' . $invoiceName;
+             $data['invoice']->move('uploads',$invoiceName);
+              $upload->file=$invoiceName;
+              $upload->fileNumber=$data['invoiceNumber'];
               $upload->name='Invoice';
               $upload->save();
 

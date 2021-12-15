@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\TestMail;
 use App\Models\Agency;
+use App\Models\Centre;
 use App\Models\Station;
 use App\Models\Supplier;
 use App\Models\Department;
@@ -240,6 +241,26 @@ class SuppliersController extends Controller
             foreach ($models as $department) {
     
                 echo '<option value="' . $department->id . '">' . $department->dptName . '</option>';
+            }
+        }
+        public function fetchHcentres(){
+            $models = Centre::where('id'!=53)->get();
+
+            echo '<option value="" disabled>-----select Centres---</option>';
+    
+            foreach ($models as $hcentre) {
+    
+                echo '<option value="' . $hcentre->id . '">' . $hcentre->centreName . '</option>';
+            }
+        }
+        public function fetchHks(){
+            $models = Centre::where('id'==53)->get();
+
+            echo '<option value="" disabled>-----select Centres---</option>';
+    
+            foreach ($models as $hcentre) {
+    
+                echo '<option value="' . $hcentre->id . '">' . $hcentre->centreName . '</option>';
             }
         }
       }

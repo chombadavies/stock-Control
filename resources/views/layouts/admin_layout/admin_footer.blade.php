@@ -13,7 +13,7 @@
   <style>
 
 .main-footer{
-position: sticky; 
+/* position: sticky;  */
 background-color: #fff;
 bottom: 0;
 }
