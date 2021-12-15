@@ -72,7 +72,7 @@
                   <tr>
                     
                                         <th>Action</th>
-                                        <th> Name</th>
+                                        <th> File Type</th>
                                         <th>File Number</th>
                                          <th>File Name</th>
                                          <th>upload Date</th>
