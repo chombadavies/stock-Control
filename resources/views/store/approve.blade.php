@@ -76,11 +76,11 @@
                           href="javascript:void(0)">Approved</a>
          @elseif ($orderdetail->reject==1)
                           <a class="updateApproval;badge badge-danger"   id="orderdetail-{{$orderdetail->id}}" orderdetail_id ="{{$orderdetail->id}}"
-                              href="javascript:void(0)">rejected</a>
+                              href="javascript:void(0)">Rejected</a>
                               
                               @else
                               <a class="updateApproval;badge badge-warning"   id="orderdetail-{{$orderdetail->id}}" orderdetail_id ="{{$orderdetail->id}}"
-                                href="javascript:void(0)">Pedding</a>
+                                href="javascript:void(0)">Pending</a>
                          
                       @endif
                   </td>

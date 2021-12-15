@@ -49,7 +49,7 @@
                         <div class="col-md-6 col-sm-6">
                           <input  <?php if($orderdetail->reject==1){echo 'checked';}?> type="checkbox" name="reject" required >
                           <p style="color: crimson">Confirm Order Rejection</p>
-                           <button class="btn btn-success btn-block">Save</button>
+                           <button class="btn btn-success btn-block">SAVE</button>
                          
                        </div>
                         

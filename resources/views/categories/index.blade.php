@@ -64,7 +64,7 @@
                     
                                         <th>Action</th>
                                         <th>Names</th>
-                                         <th>code</th>
+                                         <th>Code</th>
                                           <th>Created At</th>
                    
                   </tr>

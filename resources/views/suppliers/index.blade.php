@@ -64,7 +64,7 @@
                                         <th>Action</th>
                                         <th>Supplier Name</th>
                                         <th>Supplier Pin</th>
-                                         <th>supplierEmail </th>
+                                         <th>Supplier Email </th>
                                           <th>Phone Number</th>
                    
                   </tr>

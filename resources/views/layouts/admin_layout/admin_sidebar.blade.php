@@ -84,7 +84,7 @@
             <li class="nav-item">
               <a href="{{route('purchases.index')}}"  class="nav-link {{$active}}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>list of purchases</p>
+                <p>List of Purchases</p>
               </a>
             </li>
             {{-- @if (Session::get('page') =="allpurchases")
@@ -95,7 +95,7 @@
             <li class="nav-item">
               <a href="{{url('/allpurchases')}}"  class="nav-link {{$active}}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>list of All purchases</p>
+                <p>List of All Purchases</p>
               </a>
             </li> --}}
             
@@ -183,7 +183,7 @@
               <li class="nav-item">
                 <a href="{{route('products.index')}}" class="nav-link {{$active}}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>products list</p>
+                  <p>Products List</p>
                 </a>
               </li>
               
@@ -226,7 +226,7 @@
               <li class="nav-item">
                 <a href="{{route('items.index')}}"  class="nav-link {{$active}}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>List of items</p>
+                  <p>List of Items</p>
                 </a>
               </li>
               
@@ -274,7 +274,7 @@
          <li class="nav-item">
             <a href="{{url('/allstocks')}}"  class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
-              <p>ALL Stocks Register</p>
+              <p>All Stocks Register</p>
             </a>
           </li> 
           <?php endif;?>
@@ -328,7 +328,7 @@
           <li class="nav-item">
             <a href="{{url('/allrequests')}}"  class="nav-link {{$active}}">
               <i class="far fa-circle nav-icon"></i>
-              <p>ALL Requested  Items</p>
+              <p>All Requested  Items</p>
             </a>
           </li> --}}
           

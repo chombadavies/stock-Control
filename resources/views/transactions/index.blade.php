@@ -58,11 +58,11 @@
                     
                     <th>Action</th>
                                         <th>Item Name</th>
-                                        <th>supplier Name</th>
+                                        <th>Supplier Name</th>
                                         <th>Centre Name</th>
-                                        <th>staff Name</th>
-                                        <th>debit</th>
-                                         <th>credit</th>
+                                        <th>Staff Name</th>
+                                        <th>Debit</th>
+                                         <th>Credit</th>
                  </tr>
                   </thead>
                   <tbody>

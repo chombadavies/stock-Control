@@ -126,11 +126,11 @@
                        
                      </div>
                       <div class="col-sm-4 form-group">
-                        <label  style="font-weight: normal;">delivery Date</label>
+                        <label  style="font-weight: normal;">Delivery Date</label>
                         <input type="date" name="deleveryDate" id="deleveryDate" class="form-control" required>
                       </div>
                       <div class="col-sm-4 form-group">
-                        <label  style="font-weight: normal;">Delivered by(Name)</label>
+                        <label  style="font-weight: normal;">Delivered By(Name)</label>
                         <input type="text" name="delevererName" id="delevererName" class="form-control" required>
                       </div>
                         
@@ -209,7 +209,7 @@
        </tbody>
                 <tr>
                   <td>$</td>
-                  <td colspan="6" style="text-align:right" name="sum">sum totals</td>
+                  <td colspan="6" style="text-align:right" name="sum">Sum Totals</td>
                   <td>KSh</td>
                   <td>
                     <input type="text" name="sumtotal" id="sumtotal" class="form-control sumtotal" required readonly>

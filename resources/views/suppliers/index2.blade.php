@@ -56,10 +56,10 @@
                   <thead class="thead bg-success">
                   <tr>
                     <th>Supplier Name</th>
-                    <th>supplier Pin</th>
-                    <th> Supplier Email</th>
+                    <th>Supplier Pin</th>
+                    <th>Supplier Email</th>
                     <th>Phone Number</th>
-                    <th>status</th>
+                    <th>Status</th>
                     <th>Action</th>
                    
                   </tr>
