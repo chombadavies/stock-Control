@@ -13,9 +13,8 @@
             <div class="col-12">
             
 
-              <a data-url="<?=route('upload.create')?>" class="btn btn-sm btn-info reject-modal" data-title="Upload "><span class="fa fa-plus"><span>Upload Documents</a>
-  
-                                          {{-- <a href="<?=route('upload.index')?>" class="btn btn-sm btn-success reject-modal"><span class="fa fa-bars"><span>Download</a> --}}
+              <a href="<?=route('purchases.index')?>" class="btn btn-sm btn-success"><span class="fa fa-bars"><span>List of Purchases</a>
+                <a href="<?=route('upload.index')?>" class="btn btn-sm btn-success"><span class="fa fa-bars"><span>View Uploads</a>
    </div>
    <br> <br>
            <div class="col-md-12">
@@ -107,12 +106,12 @@
                       </div>
                       <div class="col-sm-4 form-group">
                         <label style="font-weight: normal;">Upload Purchase Order</label>
-                        <input type="file" name="purchase order" id="purchaseOrder" class="form-control" required>
+                        <input type="file" name="purchaseorder" id="purchaseOrder" class="form-control" required>
                         
                       </div>
                       <div class="col-sm-4 form-group ">
                         <label  style="font-weight: normal;">Upload Delivery Note</label>
-                        <input type="file" name="delivery note" id="deliveryNote" class="form-control" required>
+                        <input type="file" name="deliverynote" id="deliveryNote" class="form-control" required>
                         
                       </div>
                        
@@ -377,6 +376,43 @@
       });
   $("#sumtotal").val(sum);
     }
+
+    $(function(){
+        $("#purchaseOrder").on('change', function(event) {
+            var file = event.target.files[0];
+          if(!file.type.match('pdf.*')) {
+                alert("Purchase Order must be in pdf format");
+                location.reload();
+                $("#form-id").get(0).reset(); //the tricky part is to "empty" the input file here I reset the form.
+                return;
+            }
+
+        });
+    });
+    $(function(){
+        $("#Invoice").on('change', function(event) {
+            var file = event.target.files[0];
+          if(!file.type.match('pdf.*')) {
+                alert("Invoice must be in pdf format");
+                location.reload();
+                $("#form-id").get(0).reset(); //the tricky part is to "empty" the input file here I reset the form.
+                return;
+            }
+
+        });
+    });
+    $(function(){
+        $("#deliveryNote").on('change', function(event) {
+            var file = event.target.files[0];
+          if(!file.type.match('pdf.*')) {
+                alert("Delivery Note must be in pdf format");
+                location.reload();
+                $("#form-id").get(0).reset(); //the tricky part is to "empty" the input file here I reset the form.
+                return;
+            }
+
+        });
+    });
           
         </script>
 

@@ -54,6 +54,7 @@
             <a href="<?=route('purchases.create')?>" class="btn btn-sm btn-info" data-title="Add Item "><span class="fa fa-plus"><span>Receive Purchases</a>
 
                                         <a href="<?=route('purchases.index')?>" class="btn btn-sm btn-success"><span class="fa fa-bars"><span>List of Purchases</a>
+                                          <a href="<?=route('upload.index')?>" class="btn btn-sm btn-success"><span class="fa fa-bars"><span>View Uploads</a>
  </div>
 
           <div class="col-12">

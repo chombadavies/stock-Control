@@ -51,7 +51,7 @@
 
           <div class="col-12">
 
-            <a data-url="<?=route('upload.create')?>" class="btn btn-sm btn-info reject-modal" data-title="Add Recruitment "><span class="fa fa-plus"><span>Upload Documents</a>
+            <a href="<?=route('purchases.create')?>" class="btn btn-sm btn-info " data-title="Add Recruitment "><span class="fa fa-plus"><span>Upload Documents</a>
 
                                         </div>
 
@@ -73,7 +73,7 @@
                     
                                         <th>Action</th>
                                         <th> Name</th>
-                                        <th> Description</th>
+                                        <th>File Number</th>
                                          <th>File Name</th>
                                          <th>upload Date</th>
                                   
@@ -137,7 +137,7 @@
             columns: [
             {data: 'action', name: 'action',searchable:false,orderable:false}, 
            {data: 'name', name: 'name'},
-           {data: 'description', name: 'description'},
+           {data: 'fileNumber', name: 'fileNumber'},
            {data: 'file', name: 'file'},
            {data: 'created_at', name: 'created_at'},      
             ],
