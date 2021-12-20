@@ -46,7 +46,7 @@
       <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
       <div class="info-box-content">
-        <span class="info-box-text">Pedding Orders</span>
+        <span class="info-box-text">Pending Orders</span>
         <span class="info-box-number">{{$pedding}}</span>
         <a href="{{url('/pendinglist')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>

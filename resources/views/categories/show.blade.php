@@ -41,7 +41,7 @@
                           href="javascript:void(0)">Active</a>
                       @else 
                       <a class="updateServiceStatus"   id="service-{{$product->id}}" service_id ="{{$product->id}}"
-                          href="javascript:void(0)">InActive</a>
+                          href="javascript:void(0)">Inactive</a>
                       @endif
                     </td>
                 

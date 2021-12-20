@@ -75,7 +75,7 @@
                     
                                         <th>Action</th>
                                         <th>Supplier Name</th>
-                                        <th> Supplier pin</th>
+                                        <th>Supplier pin</th>
                                          <th>Delivery Date</th>
                                          <th>Purchase Worth</th>
                                   

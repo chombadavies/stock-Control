@@ -78,10 +78,10 @@
                           href="javascript:void(0)">Rejected</a>
                           @elseif ($order->issue==1)
                           <a class="updateApproval badge badge-info"   id="order-{{$order->id}}" order_id ="{{$order->id}}"
-                              href="javascript:void(0)">issued</a>
+                              href="javascript:void(0)">Issued</a>
                           @else 
                           <a class="updateApproval badge badge-warning"   id="order-{{$order->id}}" order_id ="{{$order->id}}"
-                              href="javascript:void(0)">Pedding</a>
+                              href="javascript:void(0)">Pending</a>
                       @endif
                   </td>
                            </tr>

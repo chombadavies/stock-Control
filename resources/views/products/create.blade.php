@@ -56,7 +56,7 @@
                         <label style="font-weight: normal;">Category</label>
                       
                       <select name="category_id" id="category_id" class="form-control" style="width: 100%" required>
-                        <option value="" selected disabled >select Category</option>
+                        <option value="" selected disabled >Select Category</option>
                       @foreach ($categories as $category)
                           <option value="{{$category->id}}">
                       {{$category->categoryName}}

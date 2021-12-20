@@ -25,8 +25,8 @@
                   <th>Item Name</th>  
                   <th>Description</th>
                   <th>Item Quantity</th>
-                  <th>price</th> 
-                  <th>total</th> 
+                  <th>Price</th> 
+                  <th>Total</th> 
                                  
                 </tr>
                 </thead>

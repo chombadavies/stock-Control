@@ -56,7 +56,7 @@
                     <th>Item Name</th>
                     <th>Item Description</th>
                     <th>Quantity</th>
-                    <th>status</th>
+                    <th>Status</th>
                    
                   </tr>
                   </thead>
@@ -70,7 +70,7 @@
                     <td>{{$order->quantity}}</td>
                     <td>@if ($order->issue==1)
                       <a class="updateApproval;badge badge-success badge-outline"  id="order-{{$order->id}}" order_id={{$order->id}}
-                          href="javascript:void(0)">issued</a>
+                          href="javascript:void(0)">Issued</a>
                     
                       @endif
                   </td>

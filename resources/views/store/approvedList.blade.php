@@ -80,7 +80,7 @@
                           href="javascript:void(0)">Approved</a>
                       @else 
                       <a class="updateApproval"   id="order-{{$order->id}}" order_id ="{{$order->id}}"
-                          href="javascript:void(0)">Pedding</a>
+                          href="javascript:void(0)">Pending</a>
                       @endif
                   </td>
 

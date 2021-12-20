@@ -58,7 +58,7 @@
                             <span style="color: red" >{{$errors->first('supplierName')}}</span>
                           </div>
                       <div class="col-sm-6 form-group">
-                        <label style="font-weight: normal;">KRA Pin</label>
+                        <label style="font-weight: normal;">KRA PIN</label>
                         <input type="text" name="supplierPin" class="form-control  @error('supplierPin') is-invalid @enderror" required  value="{{old('supplierPin')}}"  placeholder="Supplier Pin">
                         <span style="color: red" >{{$errors->first('supplierPin')}}</span>
                       </div>

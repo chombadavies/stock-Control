@@ -32,7 +32,7 @@
 
           <div class="col-12">
 
-            <a href="<?=route('stock.create')?>" class="btn btn-sm btn-info" data-title="Add Item "><span class="fa fa-plus"><span> receive Stock</a>
+            <a href="<?=route('stock.create')?>" class="btn btn-sm btn-info" data-title="Add Item "><span class="fa fa-plus"><span> Receive Stock</a>
 
                                         <a href="<?=route('stock.index')?>" class="btn btn-sm btn-success"><span class="fa fa-bars"><span> Stock Register</a>
  </div>
@@ -58,11 +58,11 @@
                     
                     <th>Action</th>
                                         <th>Item Name</th>
-                                        <th>supplier Name</th>
+                                        <th>Supplier Name</th>
                                         <th>Centre Name</th>
-                                        <th>staff Name</th>
-                                        <th>debit</th>
-                                         <th>credit</th>
+                                        <th>Staff Name</th>
+                                        <th>Debit</th>
+                                         <th>Credit</th>
                  </tr>
                   </thead>
                   <tbody>

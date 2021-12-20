@@ -34,7 +34,7 @@
                         href="javascript:void(0)">Active</a>
                     @else 
                     <a class="updateServiceStatus"   id="item-{{$item->id}}" item_id ="{{$item->id}}"
-                        href="javascript:void(0)">InActive</a>
+                        href="javascript:void(0)">Inactive</a>
                     @endif
                   </td>
               
@@ -54,7 +54,7 @@
     <!-- /.container-fluid -->
   </section>
   <style>
-    
+  
     .card{
   box-shadow: 
    5px 5px 10px 5px rgba(56, 230, 12, 0.2),

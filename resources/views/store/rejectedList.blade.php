@@ -56,7 +56,7 @@
                     <th>Item Name</th>
                     <th>Item Description</th>
                     <th>Quantity</th>
-                    <th>status</th>
+                    <th>Status</th>
                    
                   </tr>
                   </thead>

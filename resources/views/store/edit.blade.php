@@ -35,7 +35,7 @@
                              <input type="text" class="form-control" readonly id="productName" value="{{$orderdetail->product->productName }}"  name="product_id">
                         </div>
                         <div class="col-md-6 col-sm-4">
-                            <label  style="font-weight: normal;" >item  Name</label>
+                            <label  style="font-weight: normal;" >Item  Name</label>
                              <input type="text" class="form-control" id="itemName" readonly value="{{$orderdetail->item->itemName }}"  name="item_id" >
                         </div>
   
@@ -46,7 +46,7 @@
                            <input type="text" class="form-control" readonly id="itemdescription" value="{{$orderdetail->itemdescription}}"  name="itemdescription" >
                       </div>
                       <div class="col-md-6 col-sm-4">
-                        <label  style="font-weight: normal;" >order Quantity</label>
+                        <label  style="font-weight: normal;" >Order Quantity</label>
                          <input type="number" class="form-control" id="quantity" value="{{$orderdetail->quantity}}"  name="quantity">
                     </div>
                       
@@ -55,7 +55,7 @@
                    
                 <div class="row">
                         <div class="col-md-6 col-sm-6">
-                           <button class="btn btn-success btn-block">Save</button>
+                           <button class="btn btn-success btn-block">SAVE</button>
                          
                        </div>
                         

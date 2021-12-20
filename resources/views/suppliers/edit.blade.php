@@ -42,7 +42,7 @@
 
                      
                           <div class="col-md-6 col-sm-6">
-                            <label  style="font-weight: normal;" >KRA Pin</label>
+                            <label  style="font-weight: normal;" >KRA PIN</label>
                              <input type="text" class="form-control"  value="{{$supplier->supplierPin}}"  readonly name="supplierPin" placeholder="supplier Pin " required>
                         </div>
                         
@@ -63,7 +63,7 @@
                     
                 <div class="row">
                         <div class="col-md-3 col-sm-3">
-                           <button class="btn btn-success btn-block">Save</button>
+                           <button class="btn btn-success btn-block">SAVE</button>
                          
                        </div>
                         

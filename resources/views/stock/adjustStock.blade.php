@@ -10,7 +10,7 @@
 
             <div class="col-12">
 
-                <a href="<?=route('store.index')?>" class="btn btn-sm btn-info"><span class="fa fa-bars"><span> View ordered items</a>
+                <a href="<?=route('store.index')?>" class="btn btn-sm btn-info"><span class="fa fa-bars"><span> View Ordered Items</a>
      </span>
          <div class="col-12">
          <div class="card">
@@ -35,7 +35,7 @@
                              <input type="text" class="form-control" readonly id="productName" value="{{$item->productName }}"  name="product_id">
                         </div>
                         <div class="col-md-6 col-sm-4">
-                            <label  style="font-weight: normal;" >item  Name</label>
+                            <label  style="font-weight: normal;" >Item  Name</label>
                              <input type="text" class="form-control" id="itemName" readonly value="{{$item->itemName }}"  name="item_id" >
                         </div>
   
@@ -68,7 +68,7 @@
                         <div class="col-md-6 col-sm-6">
                           <input type="checkbox" name="reject" required >
                           <br>
-                          <p style="color: crimson">confirm Stock adjustment</p>
+                          <p style="color: crimson">Confirm Stock Adjustment</p>
                            <button class="btn btn-success btn-block">Adjust</button>
                          
                        </div>
