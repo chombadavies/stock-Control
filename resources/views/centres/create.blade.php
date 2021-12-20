@@ -75,13 +75,13 @@
                      
                       <div class="col-sm-4 form-group">
                         <label style="font-weight: normal;"> Centre Name</label>
-                        <input type="text" name="name" class="form-control" required  value="{{old('name')}}" id="name" >
-                        
+                        <input type="text" name="centreName" class="form-control" required  value="{{old('centreName')}}" id="name" >
+                        <span style="color: red" >{{$errors->first('centreName')}}</span>
                       </div>
                       <div class="col-sm-4 form-group">
                         <label style="font-weight: normal;">Centre Code</label>
                         <input type="text" name="code" class="form-control" required  value="{{old('code')}}" id="code">
-                        
+                        <span style="color: red" >{{$errors->first('code')}}</span>
                       </div>
                         
                       </div>

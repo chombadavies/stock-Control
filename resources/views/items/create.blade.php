@@ -80,6 +80,7 @@
                           <div class="col-md-4 col-sm-4">
                             <label  style="font-weight: normal;" >Item Name</label>
                              <input type="text" class="form-control" id="itemName"  name="itemName" placeholder="Item Name " required>
+                             <span style="color: red" >{{$errors->first('itemName')}}</span>
                         </div>
                         
                       </div>

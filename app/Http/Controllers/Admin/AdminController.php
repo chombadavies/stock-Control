@@ -64,8 +64,9 @@ $suppliers =Supplier::all();
 
     public function login(Request $request)
     {
+        dd($request);
         if ($request->isMethod('post')) {
-            $data = $request->all();
+            dd($request);
 
             // $validated = $request->validate([
             //     'email' => 'required|email|max:255',
@@ -76,11 +77,11 @@ $suppliers =Supplier::all();
             $custommessage = [
                 'email.required' => 'email is required',
                 'email.email' => 'invalid email address',
-                'password.required' => 'password is require',
+                'password.required' => 'password is required',
             ];
             $this->validate($request, $rules, $custommessage);
 
-            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+            if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
                 return redirect()->route('home');
             } else {
                 Session::flash('error_message', 'invalid email or password');

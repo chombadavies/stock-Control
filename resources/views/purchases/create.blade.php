@@ -136,6 +136,7 @@
                       <div class="col-sm-4 form-group">
                         <label  style="font-weight: normal;">Delivered by(Name)</label>
                         <input type="text" name="delevererName" id="delevererName" class="form-control" required>
+                        <span style="color: red" >{{$errors->first('delevererName')}}</span>
                       </div>
                      
           
@@ -143,8 +144,8 @@
                       <div>
                         <div class="col-md-4 col-sm-2">
                           <label   style="font-weight: normal;">Delivered by(Telephone)</label>
-                          <input type="text" name="delevererPhone" id="delevererPhone" class="form-control" class="form-control" required>
-                         
+                          <input type="text" name="delevererPhone" id="delevererPhone" maxlength="10" class="form-control" class="form-control" required>
+                          <span style="color: red" >{{$errors->first('delevererPhone')}}</span>
                        </div>
                       </div>
                     </section>

@@ -21,15 +21,19 @@
         {{-- @include('layouts.notification') --}}
         <h2>Login</h2>
 
+        ugddjdafadifdcjkf
+         2nd login
        
 <form action="{{url('/login')}}" method="POST">@csrf
 <div class="inputBx">
 <span>User Name</span>
 <input type="email" name="email" type="email" class="form-control" placeholder="Email">
+<span style="color: red" >{{$errors->first('email')}}</span>
 </div>
 <div class="inputBx">
   <span>Password</span>
   <input type="password" name="password" id="password" placeholder="Password">
+  <span style="color: red" >{{$errors->first('password')}}</span>
   </div>
   <div class="remember">
     <label for="remember"> <input type="checkbox" name="">Remember Me</label>

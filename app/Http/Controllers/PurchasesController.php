@@ -77,8 +77,15 @@ class PurchasesController extends Controller
     public function store(Request $request)
     {
 
-        // $centre_id=Auth::User()->centre_id;
-        // dd($centre_id);
+        $this->validate($request,[
+            'delevererName' => 'max:120|regex:/^[\pL\s\-]+$/u',
+           
+            'delevererPhone' => 'min:10|numeric|regex:/(01)[0-9]{9}/',
+            
+            
+            ]);
+
+
         DB::Transaction(function () use ($request) {
             //purchases
             $data = $request->all();

@@ -19,7 +19,16 @@
                           <div class="contentBx" style="width: 80%">
                               <div class="formBx ">
                                 <h1>Huduma Kenya Stock Management System</h1>
-                              {{-- @include('layouts.notification') --}}
+                                <div class="col-4">
+                                  @if (Session::has('error_message'))
+                                  <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+                                {{Session::get('error_message')}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  @endif
+                                </div>
                              <br>
                               <h2>Login</h2>
 

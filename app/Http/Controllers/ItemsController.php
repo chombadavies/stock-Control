@@ -86,6 +86,15 @@ class ItemsController extends Controller
     public function store(Request $request)
     {
 
+
+        $this->validate($request, [
+
+            'itemName' => 'string|unique:items|regex:/^[\pL\s\-]+$/u',
+
+        ], [
+            'itemName.unique' => 'This Item name already exist!',
+            'itemName.regex' => 'Item Name format is invalid',
+        ]);
         if ($request->hasFile('itemImage')) {
 
             $image_tmp = $request->file('itemImage');

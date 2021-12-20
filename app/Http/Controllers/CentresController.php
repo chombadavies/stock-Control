@@ -83,18 +83,18 @@ class CentresController extends Controller
     public function store(Request $request,Centre $centre)
     {
         $rules=[
-            'name'=>'regex:/^[\pL\s\-]+$/u',
+            'centreName'=>'regex:/^[\pL\s\-]+$/u',
             'code'=>'regex:/^[\w-]*$/',
             ];
             $custommessage=[
-            'name.required'=>'Centre name is required',
-            'code.required'=>'category code  is required',
+            'centreName.regex'=>'Centre name is not valid',
+            'code.regex'=>'category code  is not valid',
             
             ];
             $this-> validate($request,$rules,$custommessage);
                     
                     $centre->code= $request->code;
-                    $centre->name= $request->name;
+                    $centre->centreName= $request->centreName;
                     $centre->status=1;
                     $centre->save();
             
