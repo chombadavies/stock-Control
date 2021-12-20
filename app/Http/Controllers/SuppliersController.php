@@ -226,7 +226,7 @@ class SuppliersController extends Controller
          public function fetchAgencies(){
             $models = Agency::all();
 
-            echo '<option value="">-----select Department---</option>';
+            echo '<option value="" disabled>-----select Agency---</option>';
     
             foreach ($models as $agency) {
     
@@ -236,7 +236,7 @@ class SuppliersController extends Controller
           public function fetchDepartments(){
             $models = Department::all();
 
-            echo '<option value="">-----select Department---</option>';
+            echo '<option value="" disabled>-----select Department---</option>';
     
             foreach ($models as $department) {
     
@@ -244,7 +244,7 @@ class SuppliersController extends Controller
             }
         }
         public function fetchHcentres(){
-            $models = Centre::where('id'!=53)->get();
+            $models = Centre::where('id','!=',53)->get();
 
             echo '<option value="" disabled>-----select Centres---</option>';
     
@@ -254,13 +254,14 @@ class SuppliersController extends Controller
             }
         }
         public function fetchHks(){
-            $models = Centre::where('id'==53)->get();
+           
+            $models = Centre::where(['id'=>53])->get();
 
             echo '<option value="" disabled>-----select Centres---</option>';
     
-            foreach ($models as $hcentre) {
+            foreach ($models as $hks) {
     
-                echo '<option value="' . $hcentre->id . '">' . $hcentre->centreName . '</option>';
+                echo '<option value="' . $hks->id . '">' . $hks->centreName . '</option>';
             }
         }
       }
