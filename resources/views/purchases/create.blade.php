@@ -125,14 +125,24 @@
                        
                      </div>
                       <div class="col-sm-4 form-group">
+<<<<<<< HEAD
                         <label  style="font-weight: normal;">Delivery Date</label>
                         <input type="date" name="deleveryDate" id="deleveryDate" class="form-control" required>
+=======
+                        <label  style="font-weight: normal;">delivery Date</label>
+                        <input   <?php 
+                        $min = new DateTime();
+                        $min->modify("-5 days");
+                        $max = new DateTime();
+                        ?>
+                        type="date" value="<?php echo date("Y-m-d");?>" min=<?=$min->format("Y-m-d")?> max=<?=$max->format("Y-m-d")?> name="deleveryDate" id="deleveryDate" class="form-control" required>
+>>>>>>> 6c098c2a481c5c9f1feabfba74244a5b3a8f68ff
                       </div>
                       <div class="col-sm-4 form-group">
                         <label  style="font-weight: normal;">Delivered By(Name)</label>
                         <input type="text" name="delevererName" id="delevererName" class="form-control" required>
                       </div>
-                        
+                     
           
                       </div>
                       <div>

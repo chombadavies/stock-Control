@@ -54,7 +54,7 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="SystemPermisions" class="table table-bordered table-striped"  style="width:100%;">
-                  <thead class="table-success">
+                  <thead class="table bg-success">
                   <tr>
                     <th>Action</th>
                     <th>Staff Name</th>

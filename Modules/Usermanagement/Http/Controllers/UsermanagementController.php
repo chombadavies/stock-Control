@@ -66,15 +66,11 @@ class UsermanagementController extends Controller
         $data['centres'] = Centre::pluck('centreName', 'id')->toArray();
         $data['stations'] = Station::pluck('stName', 'id')->toArray();
         $data['url'] = url()->current();
-// dd($data['departments']);
-        if ($request->isMethod("post")) {
-            // $this->validate($request, [
 
-            //     'email' => 'required|email|unique:users,email',
-            //     'password' => 'required|min:6|max:10|confirmed',
-            //     'name' => 'required|string',
-            // ]);
+        if ($request->isMethod("post")) {
+           
             $data = $request->all();
+            
             DB::beginTransaction();
             $user = new User();
             $user->name = $data['name'];
@@ -86,7 +82,7 @@ class UsermanagementController extends Controller
             $user->role_id = $data['role_id'];
             $user->centre_id = $data['centre_id'];
             $user->dpt_id = $data['dpt_id'];
-
+            $user->agency_id = $data['agency_id'];
             $user->username = $data['id_number'];
             $user->user_type = "Internal";
             //    dd($data);

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Centre extends Model
 {
     use HasFactory;
+    protected $primaryKey = "id";
    public function items()
     {
         return $this->belongsToMany('App\Models\Item')->withPivot('status','quantity');

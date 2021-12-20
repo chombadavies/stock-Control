@@ -121,7 +121,7 @@
       <div class="form-group col-md-6" id="Centre">
         <label   style="font-weight: normal;">Centre <span class="text-danger">*</span></label>
         <span class="input-icon icon-right">
-          <select name="centre_id[]" id="centreId" class="form-control centre_id" style="width: 100%" required>
+          <select name="centre_id" id="centreId" class="form-control centre_id" style="width: 100%" required>
             <option value="">select Centre</option>
           </select>
         </span>
@@ -129,11 +129,17 @@
                                                                                            
   </div>
   <div class="row">
-    <div class="form-group col-md-6" id="Department">
-      <label   style="font-weight: normal;">Department <span class="text-danger">*</span></label>
-        <select name="dpt_id[]" id="dptId" class="form-control dpt_id" style="width: 100%" required>
+    <div class="form-group col-md-6" id="Agency">
+      <label   style="font-weight: normal;">Agency <span class="text-danger">*</span></label>
+        <select name="agency_id" id="agencyId" class="form-control agency_id" style="width: 100%" >
           <option value="">select Department</option>
         </select>
+</div>
+<div class="form-group col-md-6" id="Department">
+  <label   style="font-weight: normal;">Department <span class="text-danger">*</span></label>
+    <select name="dpt_id" id="dptId" class="form-control dpt_id" style="width: 100%" >
+      <option value="">select Department</option>
+    </select>
 </div>
   </div>
 
@@ -189,6 +195,7 @@
         $(function() {
             
             $('#Department').hide(); 
+            $('#Agency').hide(); 
             $('#Centre').hide(); 
             $('#Brigade').change(function(){
 
@@ -196,7 +203,8 @@
                 
               
                 if(type ==1) {
-                    $('#Department').show(); 
+                  $('#Department').show(); 
+                    $('#Agency').hide();  
                     $('#Centre').show(); 
                     var url="<?=url('/fetch/departments')?>";
                           $.get(url,function(data){
@@ -204,7 +212,8 @@
                            $(".dpt_id").html(data);
                           })
 
-                          var url="<?=url('/fetch/hcentres')?>";
+                         
+                          var url="<?=url('/fetch/hks')?>";
                           $.get(url,function(data){
                          console.log(data);
                            $(".centre_id").html(data);
@@ -212,14 +221,15 @@
                     
                 }
                 else {
-                  $('#Department').show(); 
+                  $('#Department').hide(); 
+                  $('#Agency').show(); 
                     $('#Centre').show(); 
                   var url="<?=url('/fetch/agency')?>";
                           $.get(url,function(data){
-                             $(".dpt_id").html(data);
+                             $(".agency_id").html(data);
                           })
 
-                          var url="<?=url('/fetch/hks')?>";
+                          var url="<?=url('/fetch/hcentres')?>";
                           $.get(url,function(data){
                          console.log(data);
                            $(".centre_id").html(data);
