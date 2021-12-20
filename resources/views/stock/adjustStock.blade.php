@@ -10,7 +10,7 @@
 
             <div class="col-12">
 
-                <a href="<?=route('store.index')?>" class="btn btn-sm btn-info"><span class="fa fa-bars"><span> View ordered items</a>
+                <a href="<?=route('store.index')?>" class="btn btn-sm btn-info"><span class="fa fa-bars"><span> View Ordered Items</a>
      </span>
          <div class="col-12">
          <div class="card">

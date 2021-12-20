@@ -32,9 +32,9 @@
 
           <div class="col-12">
 
-            <a href="<?=route('stock.create')?>" class="btn btn-sm btn-info" data-title="Add Item "><span class="fa fa-plus"><span>receive Stock</a>
+            <a href="<?=route('stock.create')?>" class="btn btn-sm btn-info" data-title="Add Item "><span class="fa fa-plus"><span> Receive Stock</a>
 
-                                        <a href="<?=route('stock.index')?>" class="btn btn-sm btn-success"><span class="fa fa-bars"><span>Stock Register</a>
+                                        <a href="<?=route('stock.index')?>" class="btn btn-sm btn-success"><span class="fa fa-bars"><span> Stock Register</a>
  </div>
 
           <div class="col-12">
