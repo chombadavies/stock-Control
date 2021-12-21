@@ -85,8 +85,9 @@ class UsermanagementController extends Controller
             $user->agency_id = $data['agency_id'];
             $user->username = $data['id_number'];
             $user->user_type = "Internal";
-            //    dd($data);
             $user->save();
+
+            
             $profile = new Profile();
             $profile->user_id = $user->id;
             $profile->servicenumber = $data['id_number'];
@@ -102,7 +103,7 @@ class UsermanagementController extends Controller
             $ip = $request->ip();
             SystemAudit::CreateEvent($usermodel, $event_name, $description, $severity, $ip, "User Management");
             DB::commit();
-            Session::flash("success_msg", "User Account Created Successfully");
+            Session::flash('success_message', 'Account created successfully');
             return redirect('Backend/User/Index');
 
         }

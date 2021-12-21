@@ -30,14 +30,7 @@
               </button>
             </div>
             @endif
-            @if (Session::has('error_message'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px">
-          {{Session::get('error_message')}}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            @endif
+          
           </div>
          
             <div class="card"> 
@@ -125,8 +118,6 @@
                        
                      </div>
                       <div class="col-sm-4 form-group">
-                        <label  style="font-weight: normal;">Delivery Date</label>
-                        <input type="date" name="deleveryDate" id="deleveryDate" class="form-control" required>
                         <label  style="font-weight: normal;">delivery Date</label>
                         <input   <?php 
                         $min = new DateTime();
@@ -136,7 +127,7 @@
                         type="date" value="<?php echo date("Y-m-d");?>" min=<?=$min->format("Y-m-d")?> max=<?=$max->format("Y-m-d")?> name="deleveryDate" id="deleveryDate" class="form-control" required>
                       </div>
                       <div class="col-sm-4 form-group">
-                        <label  style="font-weight: normal;">Delivered By(Name)</label>
+                        <label  style="font-weight: normal;">Delivered by(Name)</label>
                         <input type="text" name="delevererName" id="delevererName" class="form-control" required>
                         <span style="color: red" >{{$errors->first('delevererName')}}</span>
                       </div>
@@ -216,7 +207,7 @@
        </tbody>
                 <tr>
                   <td>$</td>
-                  <td colspan="6" style="text-align:right" name="sum">Sum Totals</td>
+                  <td colspan="6" style="text-align:right" name="sum">sum totals</td>
                   <td>KSh</td>
                   <td>
                     <input type="text" name="sumtotal" id="sumtotal" class="form-control sumtotal" required readonly>

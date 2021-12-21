@@ -31,14 +31,18 @@
             <a href="<?=url('/Backend/User/CreateAdmin')?>" class="btn btn-sm btn-info"><span class="fa fa-plus"><span>Add New User</a>
            <a href="<?=url('/Backend/User/Index')?>" class="btn btn-sm btn-success"><span class="fa fa-bars"><span> Registered Users</a>
               
-            @if (Session::has('success_message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
-          {{Session::get('success_message')}}
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            @endif                          </div>
+          </div>
+          <div class="col-4">
+          @if (Session::has('success_message'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px">
+        {{Session::get('success_message')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          @endif
+        
+        </div>
 
           <div class="col-12">
            
