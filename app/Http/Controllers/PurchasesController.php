@@ -80,7 +80,8 @@ class PurchasesController extends Controller
         $this->validate($request,[
             'delevererName' => 'max:120|regex:/^[\pL\s\-]+$/u',
            
-            'delevererPhone' => 'min:10|numeric|regex:/(01)[0-9]{9}/',
+            // 'delevererPhone' => 'regex:/(254)[0-9]{10}/',
+           'delevererPhone' => 'required|numeric|size:10'
             
             
             ]);

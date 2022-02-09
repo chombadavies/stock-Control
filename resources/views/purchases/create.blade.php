@@ -79,12 +79,12 @@
                       </div>
                       <div class="col-sm-4 form-group ">
                         <label  style="font-weight: normal;">Purchase Order No</label>
-                        <input type="text" name="orderNumber" id="orderNumber" class="form-control" required>
+                        <input type="text" name="orderNumber" id="orderNumber" class="form-control" value="{{old('orderNumber')}}" required>
                         
                       </div>
                         <div class="col-md-4 col-sm-4">
                           <label  style="font-weight: normal;" >Delivery Note No</label>
-                          <input type="text" name="deliveryNoteNumber" id="deliveryNoteNumber" class="form-control" required>
+                          <input type="text" name="deliveryNoteNumber" id="deliveryNoteNumber" value="{{old('deliveryNoteNumber')}}" class="form-control" required>
                          
                        </div>
                       
@@ -94,12 +94,12 @@
                       
                       <div class="col-sm-4 form-group ">
                         <label  style="font-weight: normal;">Invoice No</label>
-                        <input type="text" name="invoiceNumber" id="invoiceNumber" class="form-control" required>
+                        <input type="text" name="invoiceNumber" id="invoiceNumber" value="{{old('invoiceNumber')}}"  class="form-control" required>
                         
                       </div>
                       <div class="col-sm-4 form-group">
                         <label style="font-weight: normal;">Upload Purchase Order</label>
-                        <input type="file" name="purchaseorder" id="purchaseOrder" class="form-control" required>
+                        <input type="file" name="purchaseorder" id="purchaseOrder" class="form-control" value="{{old('purchaseorder')}}" required>
                         
                       </div>
                       <div class="col-sm-4 form-group ">
@@ -137,7 +137,7 @@
                       <div>
                         <div class="col-md-4 col-sm-2">
                           <label   style="font-weight: normal;">Delivered by(Telephone)</label>
-                          <input type="text" name="delevererPhone" id="delevererPhone" maxlength="10" class="form-control" class="form-control" required>
+                          <input type="text" name="delevererPhone" id="delevererPhone" maxlength="17" value="{{old('delevererPhone')}}" class="form-control" class="form-control" required placeholder="254-728000000">
                           <span style="color: red" >{{$errors->first('delevererPhone')}}</span>
                        </div>
                       </div>

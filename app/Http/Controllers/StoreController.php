@@ -202,7 +202,7 @@ class StoreController extends Controller
 
             // $item = CentreItem::where(['centre_id' => Auth::User()->centre_id, 'item_id' => $orderdetails['item_id']])
             // ->first()->toArray();
-            dd($orderdetails['quantity']);
+           
             
         return view('store.approve', compact('orderdetails'));
 

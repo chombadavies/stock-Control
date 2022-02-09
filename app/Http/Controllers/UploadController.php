@@ -55,7 +55,7 @@ class UploadController extends Controller
             $upload=new Upload();
 
             $file=$request->file;
-            dd($file);
+           
             $fileName=time().'.'.$file->getClientOriginalExtension();
             $request->file->move('uploads',$fileName);
             $upload->file=$fileName;

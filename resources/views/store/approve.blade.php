@@ -55,7 +55,7 @@
                     <th>Product</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
-                    <th>Stock</th>
+                    
                     <th>Staff Name</th>
                     <th>Request Type</th>
                     <th>Appproval</th>
@@ -69,6 +69,8 @@
                     <td>{{$orderdetail->productName }}</td>
                     <td>{{$orderdetail->itemName}}</td>   
                     <td>{{$orderdetail->quantity}}</td>
+                      {{-- <td> <a class="updateApproval;badge badge-info"   id="orderdetail-{{$orderdetail->id}}" orderdetail_id ="{{$orderdetail->id}}"
+                        href="javascript:void(0)">Consult</a></td>  --}}
                     <td>{{$orderdetail->name}}</td> 
                     <td>{{$orderdetail->names}}</td> 
                     <td>@if ($orderdetail->approve==1)

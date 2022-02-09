@@ -97,7 +97,7 @@ class CentresController extends Controller
                     $centre->centreName= $request->centreName;
                     $centre->status=1;
                     $centre->save();
-            
+          
                     Session::flash('success_message','centre added successfully');
                     return redirect()->route('centres.index');
     }
