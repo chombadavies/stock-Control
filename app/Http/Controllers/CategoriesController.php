@@ -191,7 +191,7 @@ class CategoriesController extends Controller
         <ul class="dropdown-menu">
         <li><a style="cursor:pointer;" class="reject-modal"  data-title="Edit Details" data-url="' . $edit_url . '">Edit Category </a></li>
         <li><div class="dropdown-divider"></div></li>
-        <li><a style="cursor:pointer;" class="reject-modal"  data-title="View" data-url="' . $view_url . '">View Details</a></li>
+        <li><a style="cursor:pointer;" class="reject-modal"  data-title="View" data-url="' . $view_url . '">View Category Products</a></li>
         </ul>
         </div> ';
 

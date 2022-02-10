@@ -137,7 +137,7 @@
                       <div>
                         <div class="col-md-4 col-sm-2">
                           <label   style="font-weight: normal;">Delivered by(Telephone)</label>
-                          <input type="text" name="delevererPhone" id="delevererPhone" maxlength="17" value="{{old('delevererPhone')}}" class="form-control" class="form-control" required placeholder="254-728000000">
+                          <input type="text" name="delevererPhone" id="delevererPhone" maxlength="10" value="{{old('delevererPhone')}}" class="form-control" class="form-control" required placeholder="0728000000">
                           <span style="color: red" >{{$errors->first('delevererPhone')}}</span>
                        </div>
                       </div>

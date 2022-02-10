@@ -81,7 +81,7 @@ class PurchasesController extends Controller
             'delevererName' => 'max:120|regex:/^[\pL\s\-]+$/u',
            
             // 'delevererPhone' => 'regex:/(254)[0-9]{10}/',
-           'delevererPhone' => 'required|numeric|size:10'
+        //    'delevererPhone' => 'required|numeric|size:10'
             
             
             ]);

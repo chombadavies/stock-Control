@@ -65,7 +65,7 @@
                     </td>
                     <td>
                       <select name="product_id[]" id="productId" class="form-control product_id" style="width: 100%" required>
-                        <option value="" selected disabled >select Product</option>
+                        <option value="" selected  >select Product</option>
                       </select>
                     </td>
                     <td>

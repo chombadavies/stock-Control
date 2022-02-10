@@ -319,7 +319,6 @@
             </a>
           </li>
           <?php endif;?>
-{{-- 
           @if (Session::get('page') =="allrequests")
           <?php $active ='active' ?>
           @else 
@@ -330,7 +329,19 @@
               <i class="far fa-circle nav-icon"></i>
               <p>All Requested  Items</p>
             </a>
-          </li> --}}
+          </li> 
+          
+          <!-- @if (Session::get('page') =="alltransactions")
+          <?php $active ='active' ?>
+          @else 
+          <?php $active ='' ?>
+       @endif
+          <li class="nav-item">
+            <a href="{{url('/fetchalltransactions')}}"  class="nav-link {{$active}}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>All Transactions</p>
+            </a>
+          </li>  -->
           
           @if (Session::get('page') =="pendinglist")
           <?php $active ='active' ?>
@@ -470,9 +481,9 @@
    </ul>
  </li>
 <?php endif;?>
-          <br>
+          <!-- <br>
           <?php if(Auth::User()->hasRole("SuperAdmin")):?>
-          <!--huduma centres -->
+          huduma centres
             @if (Session::get('page') =="add supplier" || Session::get('page')=='suppliers')
             <?php $active ='active' ?>
             @else 
@@ -501,7 +512,7 @@
               </li>
             </ul>
           </li>
-         <?php endif;?> 
+         <?php endif;?>  -->
                    <br>  
           <?php if(Auth::User()->hasRole("SuperAdmin")):?>
      @if (Session::get('page') =="users" || Session::get('page') == "create user" 

@@ -140,4 +140,49 @@ class TransactionsController extends Controller
             ->make(true);
     }
 
+
+public function allTransactions(){
+    $data['page_title']="aalTransactions";
+    // $centre = Centre::where(['id'=>Auth::User()->centre_id])->first();
+return view('transactions.all',$data)->with(compact('centre'));
+}
+
+
+    
+    public function fetchAllTransactions()
+    {
+        
+                $models = DB::table('transactions')
+        ->leftJoin('users', 'transactions.user_id', '=', 'users.id')
+        ->leftJoin('centres', 'transactions.centre_id', '=', 'centres.id')
+        ->leftJoin('purchases', 'transactions.purchase_id', '=', 'purchases.id')
+        ->leftJoin('suppliers', 'transactions.supplier_id', '=', 'suppliers.id')
+        ->leftJoin('items', 'transactions.item_id', '=', 'items.id')
+        ->select('transactions.id', 'centres.centreName', 'users.name','suppliers.supplierName', 'items.itemName','transactions.debit','transactions.credit')
+        // ->where(['transactions.centre_id'=>Auth::User()->centre_id])
+        // // 'transac_date'=> DATE(NOW())
+      ->get();
+        // dd($models);
+
+        return Datatables::of($models)
+
+            ->addColumn('action', function ($model) {
+                $edit_url = url('/stocks/' . $model->id . '/edit');
+                $view_url = url('/stocks/');
+
+                return '<div class="dropdown ">
+    <button class="btn btn-success btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+    <li><a style="cursor:pointer;" class="reject-modal"  data-title="Edit Details" data-url="' . $edit_url . '">Edit Item </a></li>
+    <li><div class="dropdown-divider"></div></li>
+    <li><a style="cursor:pointer;" class="reject-modal"  data-title="View" data-url="' . $view_url . '">Act/Deactivate item</a></li>
+
+    </ul>
+    </div> ';
+
+            })
+            ->make(true);
+    }
+
 }

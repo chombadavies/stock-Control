@@ -129,6 +129,7 @@ class StoreController extends Controller
                     $order_detail->user_id = $user_id;
                     $order_detail->centre_id = Auth::User()->centre_id;
                     $order_detail->dpt_id = Auth::User()->dpt_id;
+                    $order_detail->agency_id = Auth::User()->agency_id;
                     $order_detail->save();
                     $order_detail_id = $order_detail->id;
                 

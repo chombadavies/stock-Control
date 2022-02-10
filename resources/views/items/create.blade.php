@@ -52,9 +52,7 @@
 
                  <form role="form" method="post"  name="recruitForm" action="{{route('items.store')}}" 
                 id="recruitForm" enctype="multipart/form-data">@csrf
-                
-                   
-                    <div class="row">
+                <div class="row">
                         <div class="col-sm-4 form-group">
                             <label style="font-weight: normal;">Category</label>
                           
@@ -75,11 +73,9 @@
                           </select>
                          
                           </div>
-
-                        
-                          <div class="col-md-4 col-sm-4">
+                         <div class="col-md-4 col-sm-4">
                             <label  style="font-weight: normal;" >Item Name</label>
-                             <input type="text" class="form-control" id="itemNa<span style="color: red" >{{$errors->first('itemName')}}</span>me"  name="itemName" placeholder="Item Name " required>
+                             <input type="text" class="form-control" id="itemNa<span style=" color: red name="itemName" placeholder="Item Name " required ><span>{{$errors->first('itemName')}}</span>
                              
                         </div>
                         

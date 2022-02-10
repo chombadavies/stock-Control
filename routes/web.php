@@ -75,6 +75,7 @@ Route::any('fetchstock',[\App\Http\Controllers\PurchasesController::class, 'fetc
 Route::any('fetchsuppliers',[\App\Http\Controllers\SuppliersController::class, 'fetchSuppliers']);
 Route::any('fetchtransactions',[\App\Http\Controllers\TransactionsController::class, 'fetchTransactions']);
 Route::any('fetchallpurchases',[\App\Http\Controllers\PurchasesController::class, 'fetchallpurchases']);
+Route::any('fetchalltransactions',[\App\Http\Controllers\TransactionsController::class, 'fetchallTransactions']);
 Route::any('fetchallstock',[\App\Http\Controllers\PurchasesController::class, 'fetchallstock']);
 Route::any('/fetch/agency',[\App\Http\Controllers\SuppliersController::class, 'fetchAgencies']);
 Route::any('/fetch/departments',[\App\Http\Controllers\SuppliersController::class, 'fetchDepartments']);

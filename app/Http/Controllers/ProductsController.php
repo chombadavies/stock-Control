@@ -198,7 +198,7 @@ class ProductsController extends Controller
     public function cascadeProducts($id)
     {
         $models = Product::Where(['category_id' => $id])->OrderBy('productName')->get();
-        echo '<option value="" disabled>-----select Product---</option>';
+        echo '<option value="">-----select Product---</option>';
         foreach ($models as $product) {
 
             echo '<option value="' . $product->id . '">' . $product->productName . '</option>';
