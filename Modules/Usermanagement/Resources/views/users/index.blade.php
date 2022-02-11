@@ -68,12 +68,9 @@
                     <th>Role</th>
                     <th>Centre</th>
                     <th>Department</th>
-                    <th>Personal No</th>
                     <th>Account Status</th>
                     <th>Last Login </th>
                     <th>Creation Date</th>
-                    
-                   
                   </tr>
                   </thead>
                   <tbody>
@@ -119,9 +116,7 @@
             {data: 'user_role', name: 'user_role'},
             {data: 'centreName', name: 'centreName'},
             {data: 'dptName', name: 'dptName'},
-            {data: 'servicenumber', name: 'servicenumber'},
             {data: 'user_status', name: 'user_status'},
-           
             {data: 'lastlogindate', name: 'lastlogindate'},
              {data: 'created_at', name: 'created_at'},
             ],

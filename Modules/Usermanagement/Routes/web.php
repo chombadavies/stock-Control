@@ -16,7 +16,7 @@ Route::prefix('Backend')->group(function() {
     Route::any('/Users/ViewPermission/{id}','UsermanagementController@ViewPermission');
     Route::any('/Users/ViewRoleUser/{id}','UsermanagementController@ViewRoleUser');
     Route::any('/User/Edit/{id}','UsermanagementController@EditDetails');
-  ;
+
 
 
      Route::any('/RecruitmentStation/Create','RecruitmentCenterController@Create');

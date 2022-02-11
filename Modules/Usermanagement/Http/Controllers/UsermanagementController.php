@@ -113,12 +113,13 @@ class UsermanagementController extends Controller
 
     public function fetchUsers()
     {
-        $models = DB::select(' select  distinct users.id,users.name,email,username,phone,user_type,user_status,gender,users.created_at,roles.name as user_role,profiles.servicenumber,departments.dptName,centres.centreName,users.lastlogindate from users
-   join profiles on profiles.user_id=users.id
-  join  model_has_roles on model_has_roles.model_id=users.id
-  join centres on centres.id=users.centre_id
-  join departments on departments.id=users.dpt_id
-  join roles on roles.id=model_has_roles.role_id');
+        $models = DB::select(' select  distinct users.id,users.name,email,username,phone,user_type,user_status,gender,users.created_at,roles.name as user_role,departments.dptName,centres.centreName,users.lastlogindate from users
+        join profiles on profiles.user_id=users.id
+       join  model_has_roles on model_has_roles.model_id=users.id
+       join centres on centres.id=users.centre_id
+       left 
+       join departments on departments.id=users.dpt_id
+       join roles on roles.id=model_has_roles.role_id  group by  users.id,users.name,email,username,phone,user_type,user_status,gender,users.created_at, user_role,departments.dptName,centres.centreName,users.lastlogindate');
         return Datatables::of($models)
             ->rawColumns(['action'])
             ->addColumn('action', function ($model) {
